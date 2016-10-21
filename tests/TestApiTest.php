@@ -11,11 +11,23 @@ class TestApiTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
-    {
+    public function ShowAllTask() {
       //  $this->assertTrue(true);
-        $this->json('GET', '/app/task')
+        $this->json('GET', '/app/task')-> seeJson();
            // ->dump();
-            -> seeJson();
+
     }
+
+    public function testShowOneTask() {
+
+
+        $id = 1;
+        $this->json('GET', '/app/task', '/', $id)-> seeJson();
+
+    }
+
+
+
 }
+
+
