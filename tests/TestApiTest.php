@@ -1,0 +1,21 @@
+<?php
+
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+
+class TestApiTest extends TestCase
+{
+    /**
+     * A basic test example.
+     *
+     * @return void
+     */
+    public function testExample()
+    {
+      //  $this->assertTrue(true);
+        $this->json('GET', '/app/task')
+           // ->dump();
+            -> seeJson();
+    }
+}
