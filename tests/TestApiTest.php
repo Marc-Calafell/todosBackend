@@ -6,23 +6,30 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class TestApiTest extends TestCase
 {
+    private $uri = '/app/task';
+
     /**
      * A basic test example.
      *
      * @return void
      */
-    public function ShowAllTask() {
+    public function testShowAllTask() {
       //  $this->assertTrue(true);
-        $this->json('GET', '/app/task')-> seeJson();
-           // ->dump();
+        $this->json('GET',$this->uri)//-> seeJson();
+           ->dump();
 
     }
 
     public function testShowOneTask() {
 
-
+        $task = factory(App\Task::class)->create();
         $id = 1;
-        $this->json('GET', '/app/task', '/', $id)-> seeJson();
+        $this->json('GET', $this->uri, '/', $id)-> seeJsonContains([
+            'name'=>$task->name,
+            'done'=>$task->done,
+            'priority'=>$task->priority
+
+        ]);
 
     }
 
