@@ -37,7 +37,7 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        Task::r
+        //Task::r
     }
 
     /**
