@@ -6,6 +6,7 @@ use App\Task;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use League\Flysystem\Exception;
 
 class TaskController extends Controller
 {
@@ -26,7 +27,8 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        //$tasks= Task::paginate(15);
+       // return
     }
 
     /**
@@ -48,7 +50,16 @@ class TaskController extends Controller
      */
     public function show($id)
     {
-        return Task::findOrFail($id);
+        try {
+            return Task::findOrFail($id);
+
+        } catch (Exception $error) {
+            return Response::json([
+                "error" => "Hi ha agut un error",
+                "code" => "404"
+            ]);
+        }
+
     }
 
     /**
