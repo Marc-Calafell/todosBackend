@@ -50,7 +50,7 @@ class TaskController extends Controller
      */
     public function show($id)
     {
-        try {
+       /* try {
             return Task::findOrFail($id);
 
         } catch (Exception $error) {
@@ -58,7 +58,8 @@ class TaskController extends Controller
                 "error" => "Hi ha agut un error",
                 "code" => "404"
             ]);
-        }
+        }*/
+
 
     }
 
