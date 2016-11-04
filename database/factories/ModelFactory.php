@@ -23,11 +23,4 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
 
-    return [
-        'name' => $faker->name,
-        'done' => $faker->boolean,
-        'priority' =>$faker->randomDigit
-    ];
-});

@@ -3,22 +3,39 @@
 namespace App\Http\Controllers;
 
 use App\Task;
+use App\Transformers\TaskTransformer;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use League\Flysystem\Exception;
+use Response;
 
-class TaskController extends Controller
+class TasksController extends Controller
 {
+    /**
+     * TasksController constructor.
+     */
+    public function __construct(TaskTransformer $transformer)
+    {
+        parent::__construct($transformer);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Task::all();
+        // No metadata
+        // Pagination
+        // No error messages
+        // Transformations: hem de transformar el que ensenyem
+        $tasks = Task::paginate(15);
+        return $this->generatePaginatedResponse($tasks,["propietari" => "Sergi Tur"]);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -27,8 +44,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //$tasks= Task::paginate(15);
-       // return
+        //
     }
 
     /**
@@ -39,7 +55,11 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //Task::r
+//        $request->input('name');
+//        dd($request->all());
+
+        Task::create($request->all());
+//        Task::create($request->all());
     }
 
     /**
@@ -50,16 +70,29 @@ class TaskController extends Controller
      */
     public function show($id)
     {
-       /* try {
-            return Task::findOrFail($id);
+//        try {
+//            return Task::findOrFail($id);
+//        } catch (\Exception $e) {
+//            return Response::json([
+//                "error" => "Hi ha hagut una excepció",
+//                "code" => 10
+//            ],404);
+//        }
 
-        } catch (Exception $error) {
-            return Response::json([
-                "error" => "Hi ha agut un error",
-                "code" => "404"
-            ]);
-        }*/
+//        $task = Task::find($id);
+//
+//        if ( $task != null) {
+//            return $task;
+//        }
+//
+//        return Response::json([
+//            "error" => "Hi ha hagut una excepció",
+//            "code" => 10
+//        ],404);
 
+        $task = Task::findOrFail($id);
+
+        return $this->transform($task);
 
     }
 
@@ -96,4 +129,8 @@ class TaskController extends Controller
     {
         //
     }
+
+
+
+
 }
