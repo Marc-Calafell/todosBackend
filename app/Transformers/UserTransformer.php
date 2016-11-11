@@ -3,9 +3,8 @@
 namespace App\Transformers;
 
 use App\Exceptions\IncorrectModelException;
-use App\Transformers\Contracts\Transformer;
 
-class UserTransformer implements Transformer
+class UserTransformer extends Transformer
 {
     public function transform($resource)
     {
@@ -18,4 +17,8 @@ class UserTransformer implements Transformer
             'email'     => $resource['email'],
         ];
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 77e35ab6dc972761f25ec180c66aba89ba0b8c2c

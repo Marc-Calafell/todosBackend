@@ -1,20 +1,15 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Transformers\Contracts\Transformer;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Response;
-
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
     protected $transformer;
-
     /**
      * Controller constructor.
      *
@@ -24,7 +19,6 @@ class Controller extends BaseController
     {
         $this->transformer = $transformer;
     }
-
     protected function transformCollection($resources)
     {
         //Collections: Laravel collections
@@ -32,7 +26,6 @@ class Controller extends BaseController
             return $this->transformer->transform($resource);
         }, $resources);
     }
-
     /**
      * @param $resource
      *
@@ -42,12 +35,11 @@ class Controller extends BaseController
     {
         $paginationData = $this->generatePaginationData($resources);
         $data = [
-            'data' => $this->transformCollection($resources->items()),
+            'data' => $this->transformer->transformCollection($resources->items()),
+            'data' => $this->transformCollection($resources->items())
         ];
-
         return Response::json(array_merge($metadata, $paginationData, $data), 200);
     }
-
     /**
      * @param $resource
      *
@@ -63,7 +55,6 @@ class Controller extends BaseController
             'next_page_url' => $resources->previousPageUrl(),
             'prev_page_url' => $resources->nextPageUrl(),
         ];
-
         return $paginationData;
     }
 }
