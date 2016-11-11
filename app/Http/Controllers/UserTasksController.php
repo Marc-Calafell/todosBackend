@@ -2,20 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Transformers\TaskTransformer;
+use App\User;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
 
 class UserTasksController extends Controller
 {
+    /**
+     * TasksController constructor.
+     */
+    public function __construct(TaskTransformer $transformer)
+    {
+        parent::__construct($transformer);
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $tasks = $user->tasks()->paginate(5);
+
+        return $this->generatePaginatedResponse($tasks, ['propietari' => 'Sergi Tur']);
     }
 
     /**
@@ -31,7 +44,8 @@ class UserTasksController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -42,7 +56,8 @@ class UserTasksController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -53,7 +68,8 @@ class UserTasksController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -64,8 +80,9 @@ class UserTasksController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -76,7 +93,8 @@ class UserTasksController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
