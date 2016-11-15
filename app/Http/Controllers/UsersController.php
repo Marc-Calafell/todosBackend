@@ -7,10 +7,15 @@ use App\User;
 use Illuminate\Http\Request;
 
 
+/**
+ * Class UsersController
+ * @package App\Http\Controllers
+ */
 class UsersController extends Controller
 {
     /**
      * UsersController constructor.
+     * @param UserTransformer $transformer
      */
     public function __construct(UserTransformer $transformer)
     {

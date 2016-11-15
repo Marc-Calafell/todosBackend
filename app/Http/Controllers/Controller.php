@@ -6,9 +6,17 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Response;
+
+/**
+ * Class Controller
+ * @package App\Http\Controllers
+ */
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    /**
+     * @var Transformer
+     */
     protected $transformer;
     /**
      * Controller constructor.
@@ -19,6 +27,11 @@ class Controller extends BaseController
     {
         $this->transformer = $transformer;
     }
+
+    /**
+     * @param $resources
+     * @return array
+     */
     protected function transformCollection($resources)
     {
         //Collections: Laravel collections
@@ -26,10 +39,12 @@ class Controller extends BaseController
             return $this->transformer->transform($resource);
         }, $resources);
     }
+
     /**
-     * @param $resource
-     *
+     * @param $resources
+     * @param array $metadata
      * @return \Illuminate\Http\JsonResponse
+     * @internal param $resource
      */
     protected function generatePaginatedResponse($resources, array $metadata = [])
     {
@@ -40,10 +55,12 @@ class Controller extends BaseController
         ];
         return Response::json(array_merge($metadata, $paginationData, $data), 200);
     }
+
     /**
-     * @param $resource
-     *
+     * @param $resources
      * @return array
+     * @internal param $resource
+     *
      */
     protected function generatePaginationData($resources)
     {

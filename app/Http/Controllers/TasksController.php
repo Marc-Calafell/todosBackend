@@ -6,12 +6,26 @@ use App\Task;
 use App\Transformers\TaskTransformer;
 use Illuminate\Http\Request;
 use Response;
-class TasksController extends Controller
-{
+
+/**
+ * Class TasksController
+ * @package App\Http\Controllers
+ *
+ */
+
+class TasksController extends Controller {
+
+    /**
+     *  Repository Object
+     * @var TaskRepository
+     */
     protected $repository;
+
 
     /**
      * TasksController constructor.
+     * @param TaskTransformer $transformer
+     * @param TaskRepository $repository
      */
     public function __construct(TaskTransformer $transformer, TaskRepository $repository)
     {
@@ -22,6 +36,7 @@ class TasksController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
