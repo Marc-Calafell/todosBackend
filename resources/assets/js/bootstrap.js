@@ -10,7 +10,7 @@ window._ = require('lodash');
 window.$ = window.jQuery = require('jquery');
 require('bootstrap-sass');
 
-require('admin-lte');
+require('adminlte');
 window.toastr = require('toastr');
 require('icheck');
 
