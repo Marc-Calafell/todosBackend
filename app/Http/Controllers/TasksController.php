@@ -1,35 +1,39 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Repositories\TaskRepository;
 use App\Task;
 use App\Transformers\TaskTransformer;
 use Illuminate\Http\Request;
-use Response;
 
 /**
  * Class TasksController
- * @package App\Http\Controllers
  *
+ * [Descripció de la classe] -> Opcional (accepta HTML bàsic)
+ *
+ * @package App\Http\Controllers
  */
-
-class TasksController extends Controller {
-
+class TasksController extends Controller
+{
     /**
-     *  Repository Object
+     * Repository object
+     *
      * @var TaskRepository
      */
     protected $repository;
 
-
     /**
      * TasksController constructor.
+     *
      * @param TaskTransformer $transformer
      * @param TaskRepository $repository
      */
     public function __construct(TaskTransformer $transformer, TaskRepository $repository)
     {
+        // $this->paginator = Paginator($transformer);
         parent::__construct($transformer);
+
         $this->repository = $repository;
     }
 
@@ -41,12 +45,10 @@ class TasksController extends Controller {
      */
     public function index(Request $request)
     {
-        // No metadata
-        // Pagination
-        // No error messages
-        // Transformations: hem de transformar el que ensenyem
+//        abort(500);
         $tasks = Task::paginate(15);
-        return $this->generatePaginatedResponse($tasks, ['propietari' => 'Marc Calafell']);
+//        dd($tasks);
+        return $this->generatePaginatedResponse($tasks, ['propietari' => 'Franc Auxach']);
     }
 
     /**
@@ -68,10 +70,12 @@ class TasksController extends Controller {
      */
     public function store(Request $request)
     {
-        //        $request->input('name');
-//        dd($request->all());
-        Task::create($request->all());
-//        Task::create($request->all());
+        Task::create($request->all());   // Retorna tots els arrays
+        return response([
+            'error'   => false,
+            'created' => true,
+            'message' => 'Task created successfully',
+        ], 200);
     }
 
     /**
@@ -83,12 +87,8 @@ class TasksController extends Controller {
      */
     public function show($id)
     {
-
-//        $task = Task::findOrFail($id);
+        //        $task = Task::findOrFail($id);
         $task = $this->repository->find($id);
-        return $this->transformer->transform($task);
-
-        $task = Task::findOrFail($id);
 
         return $this->transformer->transform($task);
     }
@@ -109,13 +109,18 @@ class TasksController extends Controller {
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param int $id
+     * @param int                      $id
      *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
+        Task::findOrFail($id)->update($request->all());
+        return response([
+            'error'   => false,
+            'updated' => true,
+            'message' => 'Task updated successfully',
+        ], 200);
     }
 
     /**
@@ -127,6 +132,11 @@ class TasksController extends Controller {
      */
     public function destroy($id)
     {
-        //
+        Task::destroy($id);
+        return response([
+            'error'   => false,
+            'destroyed' => true,
+            'message' => 'Task deleted successfully',
+        ], 200);
     }
 }

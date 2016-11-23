@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\UserRepository;
 use App\Transformers\UserTransformer;
 use App\User;
 use Illuminate\Http\Request;
-
 
 /**
  * Class UsersController
@@ -13,25 +13,31 @@ use Illuminate\Http\Request;
  */
 class UsersController extends Controller
 {
+    protected $repository;
+
     /**
      * UsersController constructor.
      * @param UserTransformer $transformer
+     * @param UserRepository $repository
      */
-    public function __construct(UserTransformer $transformer)
+    public function __construct(UserTransformer $transformer, UserRepository $repository)
     {
         parent::__construct($transformer);
+
+        $this->repository = $repository;
     }
 
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $users = User::paginate(15);
 
-        return $this->generatePaginatedResponse($users, ['propietari' => 'Marc Calafell']);
+        return $this->generatePaginatedResponse($users, ['propietari' => 'Franc Auxach']);
     }
 
     /**
@@ -53,7 +59,12 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        User::create($request->all());
+        return response([
+            'error'   => false,
+            'created' => true,
+            'message' => 'User created successfully',
+        ], 200);
     }
 
     /**
@@ -65,7 +76,10 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //
+        //        $user = User::findOrFail($id);
+        $user = $this->repository->find($id);
+
+        return $this->transformer->transform($user);
     }
 
     /**
@@ -90,7 +104,12 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        User::findOrFail($id)->update($request->all());
+        return response([
+            'error'   => false,
+            'updated' => true,
+            'message' => 'User updated successfully',
+        ], 200);
     }
 
     /**
@@ -102,6 +121,11 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::destroy($id);
+        return response([
+            'error'   => false,
+            'destroyed' => true,
+            'message' => 'User deleted successfully',
+        ], 200);
     }
 }

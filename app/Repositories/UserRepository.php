@@ -1,6 +1,8 @@
 <?php
+
 namespace App\Repositories;
-use \App\Repositories\Contracts\Repository;
+
+use App\Repositories\Contracts\Repository;
 use App\User;
 
 /**
@@ -10,11 +12,13 @@ use App\User;
 class UserRepository implements Repository
 {
     /**
+     * Find a user on Database.
+     *
      * @param $id
      * @param array $columns
      * @return mixed
      */
-    public function find($id, $columns = array('*'))
+    public function find($id, $columns = ['*'])
     {
         return User::findOrFail($id);
     }

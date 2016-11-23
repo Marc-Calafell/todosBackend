@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use App\Transformers\Contracts\Transformer;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -14,10 +16,9 @@ use Response;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-    /**
-     * @var Transformer
-     */
+
     protected $transformer;
+
     /**
      * Controller constructor.
      *
@@ -29,34 +30,27 @@ class Controller extends BaseController
     }
 
     /**
+     * Generated a paginated Response
+     *
      * @param $resources
-     * @return array
-     */
-    protected function transformCollection($resources)
-    {
-        //Collections: Laravel collections
-        return array_map(function ($resource) {
-            return $this->transformer->transform($resource);
-        }, $resources);
-    }
-
-    /**
-     * @param $resources
-     * @param array $metadata
+     * @param array $metadada
      * @return \Illuminate\Http\JsonResponse
      * @internal param $resource
      */
-    protected function generatePaginatedResponse($resources, array $metadata = [])
+    protected function generatePaginatedResponse($resources, array $metadada = [])
     {
         $paginationData = $this->generatePaginationData($resources);
+
         $data = [
             'data' => $this->transformer->transformCollection($resources->items()),
-            'data' => $this->transformCollection($resources->items())
         ];
-        return Response::json(array_merge($metadata, $paginationData, $data), 200);
+
+        return Response::json(array_merge($metadada, $paginationData, $data), 200);
     }
 
     /**
+     * Generate the pagination Data.
+     *
      * @param $resources
      * @return array
      * @internal param $resource
@@ -65,13 +59,14 @@ class Controller extends BaseController
     protected function generatePaginationData($resources)
     {
         $paginationData = [
-            'total'         => $resources->total(),
-            'per_page'      => $resources->perPage(),
-            'current_page'  => $resources->currentPage(),
-            'last_page'     => $resources->lastPage(),
-            'next_page_url' => $resources->previousPageUrl(),
-            'prev_page_url' => $resources->nextPageUrl(),
+            'total'             => $resources->total(),
+            'per_page'          => $resources->perPage(),
+            'current_page'      => $resources->currentPage(),
+            'last_page'         => $resources->lastPage(),
+            'previous_page_url' => $resources->previousPageUrl(),
+            'next_page_url'     => $resources->nextPageUrl(),
         ];
+
         return $paginationData;
     }
 }

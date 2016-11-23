@@ -2,9 +2,6 @@
 
 use Illuminate\Database\Seeder;
 
-/**
- * Class TasksTableSeeder
- */
 class TasksTableSeeder extends Seeder
 {
     /**
@@ -19,9 +16,6 @@ class TasksTableSeeder extends Seeder
                 factory(App\Task::class, 5)->create(['user_id' => $user->id])
             );
         });
-
 //        factory(App\Task::class,30)->create();
-////        $task = factory(App\Task::class)->make();
-////        factory('App\Task')
     }
 }

@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Repositories\Contracts;
+
 /**
  * Interface Repository
  * @package App\Repositories\Contracts
@@ -7,9 +9,11 @@ namespace App\Repositories\Contracts;
 interface Repository
 {
     /**
+     * Find a Repository.
+     *
      * @param $id
      * @param array $columns
      * @return mixed
      */
-    public function find($id, $columns = array('*'));
+    public function find($id, $columns = ['*']);
 }

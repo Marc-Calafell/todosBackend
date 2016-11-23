@@ -3,6 +3,7 @@
 namespace App\Transformers;
 
 use App\Exceptions\IncorrectModelException;
+use App\User;
 
 /**
  * Class UserTransformer
@@ -11,23 +12,21 @@ use App\Exceptions\IncorrectModelException;
 class UserTransformer extends Transformer
 {
     /**
+     * Transform a resource.
+     *
      * @param $resource
      * @return array
      * @throws IncorrectModelException
      */
     public function transform($resource)
     {
-        if (!$resource instanceof \App\Task) {
+        if (!$resource instanceof User) {
             throw new IncorrectModelException();
         }
 
         return [
-            'name'      => $resource['name'],
-            'email'     => $resource['email'],
+            'name'  => $resource['name'],
+            'email' => $resource['email'],
         ];
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 77e35ab6dc972761f25ec180c66aba89ba0b8c2c

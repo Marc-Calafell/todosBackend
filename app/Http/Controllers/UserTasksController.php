@@ -6,7 +6,6 @@ use App\Transformers\TaskTransformer;
 use App\User;
 use Illuminate\Http\Request;
 
-
 /**
  * Class UserTasksController
  * @package App\Http\Controllers
@@ -14,7 +13,7 @@ use Illuminate\Http\Request;
 class UserTasksController extends Controller
 {
     /**
-     * TasksController constructor.
+     * UserTasksController constructor.
      * @param TaskTransformer $transformer
      */
     public function __construct(TaskTransformer $transformer)
@@ -32,9 +31,9 @@ class UserTasksController extends Controller
     {
         $user = User::findOrFail($id);
 
-        $tasks = $user->tasks()->paginate(5);
+        $tasks = $user->tasks()->paginate(15);
 
-        return $this->generatePaginatedResponse($tasks, ['propietari' => 'Sergi Tur']);
+        return $this->generatePaginatedResponse($tasks, ['propietari' => 'Franc Auxach']);
     }
 
     /**
@@ -62,13 +61,16 @@ class UserTasksController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id
-     *
+     * @param $idUser
+     * @param $idTask
      * @return \Illuminate\Http\Response
+     * @internal param int $id
+     *
      */
-    public function show($id)
+    public function show($idUser, $idTask)
     {
-        //
+        $task = User::findOrFail($idUser)->tasks[$idTask];   // Busquem primer que existeixi un usuari i a partir d'aques busquem la task
+        return $this->transformer->transform($task);
     }
 
     /**
@@ -87,24 +89,27 @@ class UserTasksController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param int                      $id
+     * @param int                      $idUser
+     * @param int                      $idTask
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $idUser, $idTask)
     {
-        //
+        User::findOrFail($idUser)->tasks[$idTask]->update($request->all());
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     *
+     * @param $idUser
+     * @param $idTask
      * @return \Illuminate\Http\Response
+     * @internal param int $id
+     *
      */
-    public function destroy($id)
+    public function destroy($idUser, $idTask)
     {
-        //
+        User::findOrFail($idUser)->tasks[$idTask]->delete();
     }
 }

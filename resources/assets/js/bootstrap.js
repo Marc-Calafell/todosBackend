@@ -10,7 +10,7 @@ window._ = require('lodash');
 window.$ = window.jQuery = require('jquery');
 require('bootstrap-sass');
 
-require('adminlte');
+require('admin-lte');
 window.toastr = require('toastr');
 require('icheck');
 
@@ -21,13 +21,12 @@ require('icheck');
  */
 
 window.Vue = require('vue');
-//require('vue-resource');
-
-
-window.Vue = require('axios');
-Vue.prototype.$http=axios;
+// require('vue-resource');
+window.axios = require('axios');
+Vue.prototype.$http = axios;
 
 require('sweetalert');
+
 /**
  * We'll register a HTTP interceptor to attach the "CSRF" header to each of
  * the outgoing requests issued by this application. The CSRF middleware
@@ -52,5 +51,3 @@ require('sweetalert');
 //     broadcaster: 'pusher',
 //     key: 'your-pusher-key'
 // });
-
-axios.defaults.headers.common['X-CSRF-TOKEN'] = Laravel.csrfToken;

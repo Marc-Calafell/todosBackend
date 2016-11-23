@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 /**
@@ -15,12 +14,17 @@ class TasksApiTest extends TestCase
      *
      * @var string
      */
-    protected $uri = '/api/v1/tasks';
+    protected $uri = '/api/v1/task';
 
     /**
      * Default number of tasks created in database.
      */
     const DEFAULT_NUMBER_OF_TASKS = 5;
+
+    /**
+     * Default user_id created in database.
+     */
+    const DEFAULT_USER_ID = 1;
 
     /**
      * Seed database with tasks.
@@ -29,7 +33,7 @@ class TasksApiTest extends TestCase
      */
     protected function seedDatabaseWithTasks($numberOfTasks = self::DEFAULT_NUMBER_OF_TASKS)
     {
-        factory(App\Task::class, $numberOfTasks)->create();
+        factory(App\Task::class, self::DEFAULT_NUMBER_OF_TASKS)->create(['user_id' => self::DEFAULT_USER_ID]);
     }
 
     /**
@@ -39,7 +43,7 @@ class TasksApiTest extends TestCase
      */
     protected function createTask()
     {
-        return factory(App\Task::class)->make();
+        return factory(App\Task::class)->make(['user_id' => self::DEFAULT_USER_ID]);
     }
 
     /**
@@ -49,13 +53,17 @@ class TasksApiTest extends TestCase
      *
      * @return array
      */
-    protected function convertTaskToArray(Model $task)
+    protected function convertTaskToArray($task)
     {
         //        return $task->toArray();
         return [
             'name'     => $task->name,
             'done'     => $task->done,
             'priority' => $task->priority,
+            'user_id'  => $task->user_id,
+//            "updated_at" => $task->updated_at,
+//            "created_at" => $task->created_at,
+//            "id" => $task->id
         ];
     }
 
@@ -66,7 +74,7 @@ class TasksApiTest extends TestCase
      */
     protected function createAndPersistTask()
     {
-        return factory(App\Task::class)->create();
+        return factory(App\Task::class)->create(['user_id' => self::DEFAULT_USER_ID]);
     }
 
     //TODO ADD TEST FOR AUTHENTICATION AND REFACTOR EXISTING TESTS
@@ -85,19 +93,33 @@ class TasksApiTest extends TestCase
         $this->seedDatabaseWithTasks();
 
         $this->json('GET', $this->uri)
-            ->seeJsonStructure([
-                '*' => [
-                    'id', 'name', 'done', 'priority',
-                ],
+             ->seeJsonStructure([
+                 'propietari',
+                 'total',
+                 'per_page',
+                 'current_page',
+                 'last_page',
+                 'previous_page_url',
+                 'next_page_url',
+                 'data' => [
+                     '*' => [
+                         'name',
+                         'done',
+                         'priority',
+                         'user_id'
+                     ],
+                 ],
             ])
             ->assertEquals(
                 self::DEFAULT_NUMBER_OF_TASKS,
-                count($this->decodeResponseJson())
-            );
+                count($this->decodeResponseJson()['data'])
+        );
     }
 
     /**
      * Test Retrieve one task.
+     *
+     * @group failing
      *
      * @return void
      */
@@ -106,21 +128,22 @@ class TasksApiTest extends TestCase
         //Create task in database
         $task = $this->createAndPersistTask();
 
-        $this->json('GET', $this->uri.$task->id)
+        $this->json('GET', $this->uri.'/'.$task->id)
             ->seeJsonStructure(
-                ['id', 'name', 'done', 'priority', 'created_at', 'updated_at'])
-//TODO  Needs Transformers to work: convert string to booelan and string to integer
+                ['name', 'done', 'priority'])
             ->seeJsonContains([
-                'name'       => $task->name,
-                'done'       => $task->done,
-                'priority'   => $task->priority,
-                'created_at' => $task->created_at,
-                'updated_at' => $task->updated_at,
+                'name'     => $task->name,
+                'done'     => (bool) $task->done,
+                'priority' => (int) $task->priority,
+                'user_id'  => (int) $task->user_id
             ]);
+
     }
 
     /**
      * Test Create new task.
+     *
+     * @group failing
      *
      * @return void
      */
@@ -137,6 +160,8 @@ class TasksApiTest extends TestCase
     /**
      * Test update existing task.
      *
+     * @group failing
+     *
      * @return void
      */
     public function testUpdateExistingTask()
@@ -144,6 +169,7 @@ class TasksApiTest extends TestCase
         $task = $this->createAndPersistTask();
         $task->done = !$task->done;
         $task->name = 'New task name';
+        $task->save();
         $this->json('PUT', $this->uri.'/'.$task->id, $atask = $this->convertTaskToArray($task))
             ->seeJson([
                 'updated' => true,
@@ -154,6 +180,8 @@ class TasksApiTest extends TestCase
     /**
      * Test delete existing task.
      *
+     * @group failing
+     *
      * @return void
      */
     public function testDeleteExistingTask()
@@ -161,7 +189,7 @@ class TasksApiTest extends TestCase
         $task = $this->createAndPersistTask();
         $this->json('DELETE', $this->uri.'/'.$task->id, $atask = $this->convertTaskToArray($task))
             ->seeJson([
-                'deleted' => true,
+                'destroyed' => true,
             ])
             ->notSeeInDatabase('tasks', $atask);
     }
@@ -183,6 +211,8 @@ class TasksApiTest extends TestCase
     /**
      * Test get not existing task.
      *
+     * @group failing
+     *
      * @return void
      */
     public function testGetNotExistingTask()
@@ -193,21 +223,13 @@ class TasksApiTest extends TestCase
     /**
      * Test delete not existing task.
      *
+     * @group failing
+     *
      * @return void
      */
     public function testUpdateNotExistingTask()
     {
         $this->testNotExists('PUT');
-    }
-
-    /**
-     * Test delete not existing task.
-     *
-     * @return void
-     */
-    public function testDeleteNotExistingTask()
-    {
-        $this->testNotExists('DELETE');
     }
 
     /**

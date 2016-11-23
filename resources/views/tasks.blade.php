@@ -1,19 +1,11 @@
 @extends('adminlte::layouts.app')
 
 @section('htmlheader_title')
-{{'adminlte_lang::message.home'}}
-
+    TODO LIST
 @endsection
 
-
-
 @section('main-content')
-
- <example></example>
-
- <todos></todos>
-
-
-
-
+    <div id="app">
+        <todos></todos>
+    </div>
 @endsection
