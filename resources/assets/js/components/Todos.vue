@@ -8,7 +8,21 @@
             <div class="box-header with-border">
                 <h3 class="box-title">Tasques</h3>
             </div>
-            <!-- /.box-header -->
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-default">{{Visibility}}</button>
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <span class="caret"></span>
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#" v-on:click="setVisibiliti{"All"}">All</a></li>
+                    <li><a href="#" @click="setVisibiliti{"All"}">Active</a></li>
+                    <li><a href="#" @click="setVisibiliti{"All"}">Completed</a></li>
+                </ul>
+            </div>
+
+
             <div class="box-body">
                 <table class="table table-bordered">
                     <thead>
@@ -60,19 +74,35 @@
                 message: 'Hello vue!',
                 seen: false,
                 todos: [],
+                visibility: 'all'// active completed
             }
         },
         computed:{
-            filteredTodos: function{
-                return this.todos.filter(function(todo){
+
+            filteredTodos: function(){
+
+            var filters = {
+                all: function(todos){
+                    return todos;
+                },
+
+                active: function(todos){
+                return todos.filter(function (todo){
                     return !todo.done;
-
-                   // if(todo.done == true){
-                   //     return null;
-                   // }
-                   // return;
-
                 })
+                },
+
+                competed: function(todos){
+                    return todos.filter(function (todo){
+                    return todo.done;
+                })
+
+                }
+
+            }
+
+            return filters[this.visibility](this.todos);
+
 
 
             }
@@ -96,6 +126,8 @@
                     console.log(response);
                 });
             }
+
+
         }
     }
 </script>
