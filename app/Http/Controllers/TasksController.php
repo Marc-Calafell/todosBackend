@@ -70,7 +70,7 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
-        Task::create($request->all());   // Retorna tots els arrays
+        Task::create($request->all());
         return response([
             'error'   => false,
             'created' => true,
@@ -87,7 +87,7 @@ class TasksController extends Controller
      */
     public function show($id)
     {
-        //        $task = Task::findOrFail($id);
+
         $task = $this->repository->find($id);
 
         return $this->transformer->transform($task);

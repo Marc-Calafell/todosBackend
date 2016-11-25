@@ -9,6 +9,30 @@
                 <h3 class="box-title">Tasques</h3>
             </div>
 
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Quick Example</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form role="form">
+                    <div class="box-body">
+                        <div class="form-group">
+                           <input type="TEXT" class="form-control" id="name" placeholder="Nom de la tasca">
+                            @keyup.enter="addtodo"
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+
+
+
+
+
+
+
             <div class="btn-group">
                 <button type="button" class="btn btn-default">{{Visibility}}</button>
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -16,9 +40,9 @@
                     <span class="sr-only">Toggle Dropdown</span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a href="#" v-on:click="setVisibiliti{"All"}">All</a></li>
-                    <li><a href="#" @click="setVisibiliti{"All"}">Active</a></li>
-                    <li><a href="#" @click="setVisibiliti{"All"}">Completed</a></li>
+                    <li><a href="#" v-on:click="setVisibiliti{'All'}">All</a></li>
+                    <li><a href="#" @click="setVisibiliti{'Active'}">Active</a></li>
+                    <li><a href="#" @click="setVisibiliti{'Completed'}">Completed</a></li>
                 </ul>
             </div>
 
@@ -52,8 +76,6 @@
 
                 </table>
             </div>
-            <!-- /.box-body -->
-            <!--TODO http://www.pontikis.net/labs/bs_pagination/demo/-->
             <div class="box-footer clearfix">
                 <ul class="pagination pagination-sm no-margin pull-right">
                     <li><a href="#">&laquo;</a></li>
@@ -71,9 +93,8 @@
     export default {
         data() {
             return {
-                message: 'Hello vue!',
                 seen: false,
-                todos: [],
+                newTodo: ''
                 visibility: 'all'// active completed
             }
         },
@@ -112,6 +133,15 @@
             this.fetchData();
         },
         methods: {
+            newTodo: function(){
+                console.log("Fuckciona");
+               // console.log(this.newTodo);
+               // this.todo.
+
+            },
+
+
+
             reverseMessage: function() {
                 this.message = this.message.split('').reverse().join('');
             },
