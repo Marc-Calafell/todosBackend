@@ -2,6 +2,9 @@
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
+/**
+ * Class TaskApiFrancTest
+ */
 class TaskApiFrancTest extends TestCase
 {
     protected $uri = '/api/v1/task';

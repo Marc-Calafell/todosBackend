@@ -3,6 +3,9 @@
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
+/**
+ * Class UsersApiTest
+ */
 class UsersApiTest extends TestCase
 {
     use DatabaseMigrations;
