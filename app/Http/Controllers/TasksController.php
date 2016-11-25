@@ -48,7 +48,7 @@ class TasksController extends Controller
 //        abort(500);
         $tasks = Task::paginate(15);
 //        dd($tasks);
-        return $this->generatePaginatedResponse($tasks, ['propietari' => 'Franc Auxach']);
+        return $this->generatePaginatedResponse($tasks, ['propietari' => 'marc calafell']);
     }
 
     /**

@@ -33,7 +33,7 @@ class UserTasksController extends Controller
 
         $tasks = $user->tasks()->paginate(15);
 
-        return $this->generatePaginatedResponse($tasks, ['propietari' => 'Franc Auxach']);
+        return $this->generatePaginatedResponse($tasks, ['propietari' => 'marc calafell']);
     }
 
     /**
@@ -69,7 +69,7 @@ class UserTasksController extends Controller
      */
     public function show($idUser, $idTask)
     {
-        $task = User::findOrFail($idUser)->tasks[$idTask];   // Busquem primer que existeixi un usuari i a partir d'aques busquem la task
+        $task = User::findOrFail($idUser)->tasks[$idTask];
         return $this->transformer->transform($task);
     }
 

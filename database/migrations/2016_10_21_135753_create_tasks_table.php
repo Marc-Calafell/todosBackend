@@ -15,7 +15,7 @@ class CreateTasksTable extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();  // Es pot afegir el paràmetre "->nullable()" per a que pugui no tindre cap valor
+            $table->integer('user_id')->unsigned();
             $table->string('name');
             $table->boolean('done');
             $table->integer('priority');

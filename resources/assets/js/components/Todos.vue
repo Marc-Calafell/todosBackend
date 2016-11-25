@@ -59,9 +59,22 @@
             return {
                 message: 'Hello vue!',
                 seen: false,
-                todos: [
+                todos: [],
+            }
+        },
+        computed:{
+            filteredTodos: function{
+                return this.todos.filter(function(todo){
+                    return !todo.done;
 
-                ],
+                   // if(todo.done == true){
+                   //     return null;
+                   // }
+                   // return;
+
+                })
+
+
             }
         },
         created() {
