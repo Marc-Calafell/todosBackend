@@ -81,6 +81,22 @@
 import pagination from './pagination.vue'
 
     export default {
+        props: {
+    // Current Page
+            currentPage: {
+                type: Number,
+                required: true
+            },
+
+
+    // Visible Pages
+            visiblePages: {
+                type: Number,
+                default: 5,
+                coerce: (val) => parseInt(val),
+            }
+        },
+
         components : {pagination},
         data() {
             return {
@@ -112,6 +128,30 @@ import pagination from './pagination.vue'
                 return filters[this.visibility](this.todos);
             }
         },
+
+        lastPage () {
+            if (this.totalPages) {
+                   return this.totalPages
+            } else {
+                return this.totalItems % this.itemsPerPage === 0
+                ? this.totalItems / this.itemsPerPage
+                : Math.floor(this.totalItems / this.itemsPerPage) + 1
+            }
+        },
+
+        paginationRange () {
+              let start = this.currentPage - this.visiblePages / 2 <= 0
+                            ? 1 : this.currentPage + this.visiblePages / 2 > this.lastPage
+                            ? this.lowerBound(this.lastPage - this.visiblePages + 1, 1)
+                            : Math.ceil(this.currentPage - this.visiblePages / 2)
+              let range = []
+              for (let i = 0; i < this.visiblePages && i < this.lastPage; i++) {
+                range.push(start + i)
+              }
+              return range
+            }
+        },
+
         created() {
             console.log('Component todolist created.');
             this.fetchData();
@@ -157,6 +197,8 @@ import pagination from './pagination.vue'
                         this.total = response.data.total;
                 }
             }
+
+
         }
     }
 </script>
