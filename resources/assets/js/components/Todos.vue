@@ -69,13 +69,7 @@
 
             <div class="box-footer clearfix">
 
-                <ul class="pagination pagination-sm no-margin pull-right">
-                    <li><a href="#">&laquo;</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">&raquo;</a></li>
-                </ul>
+
 
                 <span>mostrant tasques {{from}} - {{to}} de {{total}}</span>
             </div>
@@ -83,7 +77,11 @@
     </div>
 </template>
 <script>
+
+import pagination from './pagination.vue'
+
     export default {
+        components : {pagination},
         data() {
             return {
                 todos: [],
@@ -147,17 +145,17 @@
                     sweetAlert("Oops...", "Something went wrong!", "error");
                     console.log(response);
                 });
-            }
+            },
             fetchPage: function(page) {
 
-            this.$http.get('/api/v1/task? page=' + page ).then((response) => {
-                    console.log(response);
-                    this.todos = response.data.data;
-                    this.perPage = response.data.per_page;
-                    this.from = response.data.from;
-                    this.to = response.data.to;
-                    this.total = response.data.total;
-
+                this.$http.get('/api/v1/task? page=' + page ).then((response) => {
+                        console.log(response);
+                        this.todos = response.data.data;
+                        this.perPage = response.data.per_page;
+                        this.from = response.data.from;
+                        this.to = response.data.to;
+                        this.total = response.data.total;
+                }
             }
         }
     }
