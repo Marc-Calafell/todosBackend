@@ -61,9 +61,6 @@ class TasksApiTest extends TestCase
             'done'     => $task->done,
             'priority' => $task->priority,
             'user_id'  => $task->user_id,
-//            "updated_at" => $task->updated_at,
-//            "created_at" => $task->created_at,
-//            "id" => $task->id
         ];
     }
 
@@ -87,8 +84,30 @@ class TasksApiTest extends TestCase
      *
      * @return void
      */
+
+    public function userNotAuthenticated() {
+
+
+    }
+
+
+    public function login()
+    {
+        $user=factory(App\User::class)->create();
+        $this->actingAs($user,'api');
+
+    }
+
+
     public function testRetrieveAllTasks()
     {
+        $this->login();
+        $this->json();
+        $this->json('GET', $this->uri)
+        ->seeJsonStructure(
+            ['id','name', 'done', 'priority']);
+
+
         //Seed database
         $this->seedDatabaseWithTasks();
 
