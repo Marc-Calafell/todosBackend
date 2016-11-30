@@ -51,7 +51,7 @@
                     </thead>
                     <tbody>
                     <tr v-for="(todo, index) in filteredTodos">
-                        <td>{{index + 1}}</td>
+                        <td>{{index + from}}</td>
                         <td>{{todo.name}}</td>
                         <td>{{todo.priority}}</td>
                         <td>{{todo.done}}</td>
@@ -60,7 +60,7 @@
                                 <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
                             </div>
                         </td>
-                        <td><span class="badge bg-red">55%</span></td>
+                        <td><span class="badge bg-red">95%</span></td>
                     </tr>
                     </tbody>
 
@@ -76,6 +76,8 @@
                     <li><a href="#">3</a></li>
                     <li><a href="#">&raquo;</a></li>
                 </ul>
+
+                <span>mostrant tasques {{from}} - {{to}} de {{total}}</span>
             </div>
         </div>
     </div>
@@ -86,7 +88,10 @@
             return {
                 todos: [],
                 visibility: 'all', // 'active' 'completed'
-                newTodo: ''
+                newTodo: '',
+                from : 0,
+                to : 0,
+                total : 0
             }
         },
         computed: {
@@ -142,6 +147,17 @@
                     sweetAlert("Oops...", "Something went wrong!", "error");
                     console.log(response);
                 });
+            }
+            fetchPage: function(page) {
+
+            this.$http.get('/api/v1/task? page=' + page ).then((response) => {
+                    console.log(response);
+                    this.todos = response.data.data;
+                    this.perPage = response.data.per_page;
+                    this.from = response.data.from;
+                    this.to = response.data.to;
+                    this.total = response.data.total;
+
             }
         }
     }
