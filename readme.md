@@ -1,6 +1,12 @@
 # todosBackend
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Marc-Calafell/todosBackend/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Marc-Calafell/todosBackend/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/Marc-Calafell/todosBackend/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Marc-Calafell/todosBackend/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/Marc-Calafell/todosBackend/badges/build.png?b=master)](https://scrutinizer-ci.com/g/Marc-Calafell/todosBackend/build-status/master)
+
+[![Build Status](https://travis-ci.org/Marc-Calafell/todosBackend.svg?branch=master)](https://travis-ci.org/Marc-Calafell/todosBackend)
+
+[![StyleCI](https://styleci.io/repos/71569611/shield?branch=master)](https://styleci.io/repos/71569611)
+
 
 ## Installation
 Clone the repo in a clean folder:
