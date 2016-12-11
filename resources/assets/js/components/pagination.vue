@@ -19,22 +19,18 @@ export default {
         }
     },
     props: {
-        // Current Page
             currentPage: {
               type: Number,
               required: true
             },
-            // Total page
+
             totalPages: Number,
-            // Visible Pages
-            // Items per page
             itemsPerPage: Number,
-            // Total items
             totalItems: Number,
             visiblePages: {
-              type: Number,
-              default: 5,
-              coerce: (val) => parseInt(val)
+                type: Number,
+                default: 5,
+                coerce: (val) => parseInt(val)
             }
     },
     methods: {
