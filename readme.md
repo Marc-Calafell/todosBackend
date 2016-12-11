@@ -1,4 +1,6 @@
 # todosBackend
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Marc-Calafell/todosBackend/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Marc-Calafell/todosBackend/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/Marc-Calafell/todosBackend/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Marc-Calafell/todosBackend/?branch=master)
 
 ## Installation
 Clone the repo in a clean folder:
