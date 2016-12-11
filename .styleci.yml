@@ -1,0 +1,4 @@
+
+finder:
+  exclude:
+    - "public/plugins"
