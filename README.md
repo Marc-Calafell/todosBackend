@@ -63,8 +63,8 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 
 [link-packagist]: https://packagist.org/packages/Marc-Calafell/todosBackend/
 [link-travis]: https://travis-ci.org/Marc-Calafell/todosBackend/
-[link-scrutinizer]: https://scrutinizer-ci.com/g/Marc-Calafell/todosBackend//code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/Marc-Calafell/todosBackend/
+[link-scrutinizer]: https://scrutinizer-ci.com/g/Marc-Calafell/todosBackend/build-status/master
+[link-code-quality]: https://scrutinizer-ci.com/g/Marc-Calafell/todosBackend/?branch=master)
 [link-downloads]: https://packagist.org/packages/Marc-Calafell/todosBackend/
 [link-author]: https://github.com/Marc-Calafell/todosBackend
 [link-contributors]: ../../contributors
