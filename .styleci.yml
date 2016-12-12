@@ -1,4 +1,1 @@
-
-finder:
-  exclude:
-    - "public/plugins"
+preset: psr2
