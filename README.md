@@ -1,41 +1,49 @@
 # 
 
-[![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
-[![Build Status][ico-travis]][link-travis]
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Marc-Calafell/todosBackend/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Marc-Calafell/todosBackend/?branch=master)
 [![Coverage Status][ico-scrutinizer]][link-scrutinizer]
-[![Quality Score][ico-code-quality]][link-code-quality]
-[![Total Downloads][ico-downloads]][link-downloads]
-
-**Note:** Replace ```marc calafell``` ```Marc-Calafell/todosBackend``` ```https://github.com/Marc-Calafell/todosBackend``` ```marccalafell95@gmail.com``` ```Marc-Calafell/todosBackend``` `````` `````` with their correct values in [README.md](README.md), [CHANGELOG.md](CHANGELOG.md), [CONTRIBUTING.md](CONTRIBUTING.md), [LICENSE.md](LICENSE.md) and [composer.json](composer.json) files, then delete this line. You can run `$ php prefill.php` in the command line to make all replacements at once. Delete the file prefill.php as well.
-
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what
-PSRs you support to avoid any confusion with users and contributors.
+[![Build Status](https://scrutinizer-ci.com/g/Marc-Calafell/todosBackend/badges/build.png?b=master)](https://scrutinizer-ci.com/g/Marc-Calafell/todosBackend/build-status/master)[![Total Downloads][ico-downloads]][link-downloads]
+[![Build Status](https://travis-ci.org/Marc-Calafell/todosBackend.svg?branch=master)](https://travis-ci.org/Marc-Calafell/todosBackend)
 
 ## Install
-
-Via Composer
-
+Make composer install:
 ``` bash
-$ composer require Marc-Calafell/todosBackend/
+$ composer install
 ```
 
-## Usage
+Make npm install
+``` bash
+$ npm install
+```
+Generate a new key
+``` bash
+$ php artisan key:generate 
+```
+Rename .env.example to .env
+``` bash
+$ cp .env.example .env
+```
 
-``` php
-$skeleton = new Marc-Calafell/todosBackend\();
-echo $skeleton->echoPhrase('Hello, League!');
+Create database file
+``` bash
+$ touch database/database.sqlite
+```
+
+Migrate databases
+``` bash
+$ php artisan migrate:refresh --seed 
+```
+
+Lluminize todos Backend
+``` bash
+$ llum boot
 ```
 
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
 
-## Testing
-
-``` bash
-$ composer test
-```
 
 ## Contributing
 
