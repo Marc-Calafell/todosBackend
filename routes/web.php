@@ -1,5 +1,15 @@
 <?php
 
+
+Gate::define('update-task', function ($user, $task) {
+    return $user->id == $task->user_id;
+});
+
+
+
+
+
+
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/tasks', function () {
         return view('tasks');
