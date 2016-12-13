@@ -17,7 +17,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
+        'App\Task' => 'App\Policies\TaskPolicy',
+        //'App\User' => 'App\Policies\UserPolicy',
     ];
 
     /**
@@ -36,10 +37,6 @@ class AuthServiceProvider extends ServiceProvider
 
     private function defineGates()  {
 
-        Gate::define('show-todos', function () {
-            return false;
-        });
-
         Gate::define('possible-gate', function () {
             return true;
         });
@@ -47,27 +44,6 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('impossible-gate', function () {
             return false;
         });
-
-        Gate::define('update-task', function ($user, $task) {
-            return $user->id == $task->user_id;
-        });
-
-        Gate::define('update-task2', function ($user) {
-            return $user->isAdmin();
-        });
-
-        Gate::define('update-task3', function ($user, $task) {
-            if($user->isAdmin()) return true;
-            return $user->id == $task->user_id;
-        });
-
-        Gate::define('update-task4', function ($user, $task) {
-            if($user->isAdmin()) return true;
-            if($user->hasRole('editor')) return true;
-            return $user->id == $task->user_id;
-        });
-
-
 
     }
 }

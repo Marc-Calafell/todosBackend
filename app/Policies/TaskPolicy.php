@@ -11,15 +11,15 @@ class TaskPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view the task.
+     * Determine whether the user can list the tasks.
      *
      * @param  \App\User  $user
      * @param  \App\Task  $task
      * @return mixed
      */
-    public function view(User $user, Task $task)
+    public function show(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -42,7 +42,9 @@ class TaskPolicy
      */
     public function update(User $user, Task $task)
     {
-        //
+        if($user->isAdmin()) return true;
+        if($user->hasRole('editor')) return true;
+        return $user->id == $task->user_id;
     }
 
     /**
