@@ -2,8 +2,7 @@
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-class UsersApiTest extends TestCase
-{
+class UsersApiTest extends TestCase {
     use DatabaseMigrations;
     /**
      * RESOURCE URL ON API.
@@ -20,8 +19,7 @@ class UsersApiTest extends TestCase
      *
      * @param int $numberOfUsers to create
      */
-    protected function seedDatabaseWithUsers($numberOfUsers = self::DEFAULT_NUMBER_OF_USERS)
-    {
+    protected function seedDatabaseWithUsers($numberOfUsers = self::DEFAULT_NUMBER_OF_USERS) {
         factory(App\User::class, $numberOfUsers)->create();
     }
     /**
@@ -29,8 +27,7 @@ class UsersApiTest extends TestCase
      *
      * @return mixed
      */
-    protected function createUser()
-    {
+    protected function createUser() {
         return factory(App\User::class)->make();
     }
     /**
@@ -40,8 +37,7 @@ class UsersApiTest extends TestCase
      *
      * @return array
      */
-    protected function convertUserToArray($user)
-    {
+    protected function convertUserToArray($user) {
         return [
             'name'  => $user->name,
             'email' => $user->email,
@@ -51,35 +47,27 @@ class UsersApiTest extends TestCase
     }
     /**
      * Create and persist user on database.
-     *
      * @return mixed
      */
-    protected function createAndPersistUser()
-    {
+    protected function createAndPersistUser() {
         return factory(App\User::class)->create();
     }
-    protected function login()
-    {
+    protected function login() {
         $user = factory(App\User::class)->create();
         $this->actingAs($user, 'api');
-//        return $this;
     }
-    public function userNotAuthenticated()
-    {
+    public function userNotAuthenticated() {
         $response = $this->json('GET', $this->uri)->getResult();
         $this->assertEquals(401, $response->status());
-        // TODO: test message error
     }
     /**
      * Test Retrieve all users.
      *
-     * @group failing2
+     * @group HAATEE
      *
      * @return void
      */
-    public function testRetrieveAllUsers()
-    {
-        //Seed database
+    public function testRetrieveAllUsers() {
         $this->seedDatabaseWithUsers();
         $this->login();
         $this->json('GET', $this->uri)
@@ -106,12 +94,11 @@ class UsersApiTest extends TestCase
     /**
      * Test Retrieve one user.
      *
-     * @group failing2
+     * @group HAATEE
      *
      * @return void
      */
-    public function testRetrieveOneUser()
-    {
+    public function testRetrieveOneUser() {
         //Create user in database
         $user = $this->createAndPersistUser();
         $this->login();
@@ -126,12 +113,11 @@ class UsersApiTest extends TestCase
     /**
      * Test Create new user.
      *
-     * @group failing2
+     * @group HAATEE
      *
      * @return void
      */
-    public function testCreateNewUser()
-    {
+    public function testCreateNewUser() {
         $user = $this->createUser();
         $this->login();
         $this->json('POST', $this->uri, $anuser = $this->convertUserToArray($user))
@@ -143,12 +129,11 @@ class UsersApiTest extends TestCase
     /**
      * Test update existing user.
      *
-     * @group failing2
+     * @group HAATEE
      *
      * @return void
      */
-    public function testUpdateExistingUser()
-    {
+    public function testUpdateExistingUser() {
         $user = $this->createAndPersistUser();
         $user->name = 'New user name';
         $user->save();
@@ -162,12 +147,11 @@ class UsersApiTest extends TestCase
     /**
      * Test delete existing user.
      *
-     * @group failing2
+     * @group HAATEE
      *
      * @return void
      */
-    public function testDeleteExistingUser()
-    {
+    public function testDeleteExistingUser() {
         $user = $this->createAndPersistUser();
         $this->login();
         $this->json('DELETE', $this->uri.'/'.$user->id, $anuser = $this->convertUserToArray($user))
@@ -181,10 +165,9 @@ class UsersApiTest extends TestCase
      *
      * @param $http_method
      */
-    protected function aTestNotExists($http_method)
-    {
+    protected function aTestNotExists($http_method) {
         $this->login();
-        $this->json($http_method, $this->uri.'/99999999')
+        $this->json($http_method, $this->uri.'/99988999')
             ->seeJson([
                 'status' => 404,
             ])
@@ -193,33 +176,21 @@ class UsersApiTest extends TestCase
     /**
      * Test get not existing user.
      *
-     * @group failing2
+     * @group HAATEE
      *
      * @return void
      */
-    public function testGetNotExistingUser()
-    {
+    public function testGetNotExistingUser() {
         $this->aTestNotExists('GET');
     }
     /**
      * Test delete not existing user.
      *
-     * @group failing2
-     *
+     * @group HAATEE
      * @return void
      */
-    public function testUpdateNotExistingUser()
-    {
+    public function testUpdateNotExistingUser() {
         $this->aTestNotExists('PUT');
     }
-    /**
-     * Test pagination.
-     *
-     * @return void
-     */
-    public function testPagination()
-    {
-        //TODO
-    }
-    //TODO: Test validation
+
 }
