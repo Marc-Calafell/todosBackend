@@ -1,5 +1,13 @@
 <?php
 
+Gate::define('possible-gate', function () {
+    return false;
+});
+
+Gate::define('impossible-gate', function () {
+    return false;
+});
+
 
 Gate::define('update-task', function ($user, $task) {
     return $user->id == $task->user_id;
