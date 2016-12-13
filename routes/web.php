@@ -2,43 +2,6 @@
 
 
 
-Gate::define('show-todos', function () {
-    return false;
-});
-
-
-
-Gate::define('possible-gate', function () {
-    return true;
-});
-
-Gate::define('impossible-gate', function () {
-    return false;
-});
-
-
-Gate::define('update-task', function ($user, $task) {
-    return $user->id == $task->user_id;
-});
-
-Gate::define('update-task2', function ($user) {
-    return $user->isAdmin();
-});
-
-Gate::define('update-task3', function ($user, $task) {
-    if($user->isAdmin()) return true;
-    return $user->id == $task->user_id;
-});
-
-Gate::define('update-task4', function ($user, $task) {
-    if($user->isAdmin()) return true;
-    if($user->hasRole('editor')) return true;
-    return $user->id == $task->user_id;
-});
-
-
-
-
 Route::group(['middleware' => 'auth'], function() {
     Route::group(['middleware' => 'can'], function () {
         Route::get('/tasks', function () {
