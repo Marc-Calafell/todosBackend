@@ -61,6 +61,9 @@ class TasksApiTest extends TestCase
             'done'     => $task->done,
             'priority' => $task->priority,
             'user_id'  => $task->user_id,
+//            "updated_at" => $task->updated_at,
+//            "created_at" => $task->created_at,
+//            "id" => $task->id
         ];
     }
 
@@ -74,8 +77,19 @@ class TasksApiTest extends TestCase
         return factory(App\Task::class)->create(['user_id' => self::DEFAULT_USER_ID]);
     }
 
-    //TODO ADD TEST FOR AUTHENTICATION AND REFACTOR EXISTING TESTS
-    //NOT AUTHORIZED: $this->assertEquals(301, $response->status());
+    protected function login()
+    {
+        $user = factory(App\User::class)->create();
+        $this->actingAs($user, 'api');
+//        return $this;
+    }
+
+    public function userNotAuthenticated()
+    {
+        $response = $this->json('GET', $this->uri)->getResult();
+        $this->assertEquals(401, $response->status());
+        // TODO: test message error
+    }
 
     /**
      * Test Retrieve all tasks.
@@ -84,55 +98,34 @@ class TasksApiTest extends TestCase
      *
      * @return void
      */
-
-    public function userNotAuthenticated() {
-
-
-    }
-
-
-    public function login()
-    {
-        $user=factory(App\User::class)->create();
-        $this->actingAs($user,'api');
-
-    }
-
-
     public function testRetrieveAllTasks()
     {
-        $this->login();
-        $this->json();
-        $this->json('GET', $this->uri)
-        ->seeJsonStructure(
-            ['id','name', 'done', 'priority']);
-
-
         //Seed database
         $this->seedDatabaseWithTasks();
 
+        $this->login();
         $this->json('GET', $this->uri)
-             ->seeJsonStructure([
-                 'propietari',
-                 'total',
-                 'per_page',
-                 'current_page',
-                 'last_page',
-                 'previous_page_url',
-                 'next_page_url',
-                 'data' => [
-                     '*' => [
-                         'name',
-                         'done',
-                         'priority',
-                         'user_id'
-                     ],
-                 ],
+            ->seeJsonStructure([
+                'propietari',
+                'total',
+                'per_page',
+                'current_page',
+                'last_page',
+                'previous_page_url',
+                'next_page_url',
+                'data' => [
+                    '*' => [
+                        'name',
+                        'done',
+                        'priority',
+                        'user_id'
+                    ],
+                ],
             ])
             ->assertEquals(
                 self::DEFAULT_NUMBER_OF_TASKS,
                 count($this->decodeResponseJson()['data'])
-        );
+            );
     }
 
     /**
@@ -147,6 +140,8 @@ class TasksApiTest extends TestCase
         //Create task in database
         $task = $this->createAndPersistTask();
 
+        $this->login();
+
         $this->json('GET', $this->uri.'/'.$task->id)
             ->seeJsonStructure(
                 ['name', 'done', 'priority'])
@@ -156,7 +151,6 @@ class TasksApiTest extends TestCase
                 'priority' => (int) $task->priority,
                 'user_id'  => (int) $task->user_id
             ]);
-
     }
 
     /**
@@ -169,6 +163,9 @@ class TasksApiTest extends TestCase
     public function testCreateNewTask()
     {
         $task = $this->createTask();
+
+        $this->login();
+
         $this->json('POST', $this->uri, $atask = $this->convertTaskToArray($task))
             ->seeJson([
                 'created' => true,
@@ -189,6 +186,9 @@ class TasksApiTest extends TestCase
         $task->done = !$task->done;
         $task->name = 'New task name';
         $task->save();
+
+        $this->login();
+
         $this->json('PUT', $this->uri.'/'.$task->id, $atask = $this->convertTaskToArray($task))
             ->seeJson([
                 'updated' => true,
@@ -206,6 +206,9 @@ class TasksApiTest extends TestCase
     public function testDeleteExistingTask()
     {
         $task = $this->createAndPersistTask();
+
+        $this->login();
+
         $this->json('DELETE', $this->uri.'/'.$task->id, $atask = $this->convertTaskToArray($task))
             ->seeJson([
                 'destroyed' => true,
@@ -218,8 +221,10 @@ class TasksApiTest extends TestCase
      *
      * @param $http_method
      */
-    protected function testNotExists($http_method)
+    protected function aTestNotExists($http_method)
     {
+        $this->login();
+
         $this->json($http_method, $this->uri.'/99999999')
             ->seeJson([
                 'status' => 404,
@@ -236,7 +241,7 @@ class TasksApiTest extends TestCase
      */
     public function testGetNotExistingTask()
     {
-        $this->testNotExists('GET');
+        $this->aTestNotExists('GET');
     }
 
     /**
@@ -248,48 +253,8 @@ class TasksApiTest extends TestCase
      */
     public function testUpdateNotExistingTask()
     {
-        $this->testNotExists('PUT');
+        $this->aTestNotExists('PUT');
     }
 
-    /**
-     * Test pagination.
-     *
-     * @return void
-     */
-    public function testPagination()
-    {
-        //TODO
-    }
 
-    //TODO: Test validation
-
-    /**
-     * Test name is required and done is set to false and priority to 1.
-     *
-     * @return void
-     */
-    public function testNameIsRequiredAndDefaultValues()
-    {
-        //TODO
-    }
-
-    /**
-     * Test priority has to be an integer.
-     *
-     * @return void
-     */
-    public function testPriorityHaveToBeAnInteger()
-    {
-        //TODO
-    }
-
-    /**
-     * Test done has to be a boolean.
-     *
-     * @return void
-     */
-    public function testDoneHaveToBeBoolean()
-    {
-        //TODO
-    }
 }
