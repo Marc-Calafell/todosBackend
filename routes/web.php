@@ -1,7 +1,15 @@
 <?php
 
-Gate::define('possible-gate', function () {
+
+
+Gate::define('show-todos', function () {
     return false;
+});
+
+
+
+Gate::define('possible-gate', function () {
+    return true;
 });
 
 Gate::define('impossible-gate', function () {
@@ -32,12 +40,14 @@ Gate::define('update-task4', function ($user, $task) {
 
 
 Route::group(['middleware' => 'auth'], function() {
-    Route::get('/tasks', function () {
-        return view('tasks');
-    });
+    Route::group(['middleware' => 'can'], function () {
+        Route::get('/tasks', function () {
+            return view('tasks');
+        });
 
-    Route::get('/profile/tokens', function () {
-        return view('tokens');
+        Route::get('/profile/tokens', function () {
+            return view('tokens');
+        });
     });
 });
 

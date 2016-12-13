@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Repositories\TaskRepository;
 use App\Task;
 use App\Transformers\TaskTransformer;
+use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
 
 /**
@@ -37,12 +38,15 @@ class TasksController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
-//        abort(500);
-        $tasks = Task::paginate(15);
-//        dd($tasks);
-        return $this->generatePaginatedResponse($tasks, ['propietari' => 'marc calafell']);
+    public function index(Request $request) {
+
+
+            $tasks = Task::paginate(15);
+            return $this->generatePaginatedResponse($tasks, ['propietari' => 'marc calafell']);
+
+
+
+       // abort(403);
     }
 
     /**
