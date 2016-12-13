@@ -18,8 +18,9 @@ use Illuminate\Http\Request;
 //})->middleware('auth:api');
 //, 'middleware' => 'auth:api']
 
-Route::group(['prefix' => 'v1'], function () {
+Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function () {
     Route::resource('task', 'TasksController');
     Route::resource('user', 'UsersController');
     Route::resource('user.task', 'UserTasksController');
 });
+
