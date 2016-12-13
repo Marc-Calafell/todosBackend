@@ -9,14 +9,24 @@ Gate::define('impossible-gate', function () {
 });
 
 
-//Gate::define('update-task', function ($user, $task) {
-//    return $user->id == $task->user_id;
-//});
-Gate::define('update-task', function ($user) {
+Gate::define('update-task', function ($user, $task) {
+    return $user->id == $task->user_id;
+});
+
+Gate::define('update-task2', function ($user) {
     return $user->isAdmin();
 });
 
+Gate::define('update-task3', function ($user, $task) {
+    if($user->isAdmin()) return true;
+    return $user->id == $task->user_id;
+});
 
+Gate::define('update-task4', function ($user, $task) {
+    if($user->isAdmin()) return true;
+    if($user->hasRole('editor')) return true;
+    return $user->id == $task->user_id;
+});
 
 
 
