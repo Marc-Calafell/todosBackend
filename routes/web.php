@@ -9,8 +9,11 @@ Gate::define('impossible-gate', function () {
 });
 
 
-Gate::define('update-task', function ($user, $task) {
-    return $user->id == $task->user_id;
+//Gate::define('update-task', function ($user, $task) {
+//    return $user->id == $task->user_id;
+//});
+Gate::define('update-task', function ($user) {
+    return $user->isAdmin();
 });
 
 
