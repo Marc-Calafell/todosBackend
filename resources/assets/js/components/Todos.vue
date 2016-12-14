@@ -4,7 +4,8 @@
             <div class="box-header with-border">
                 <h3 class="box-title">Add task</h3>
             </div>
-
+            <!-- /.box-header -->
+            <!-- form start -->
             <form role="form" action="#">
                 <div class="box-body">
                     <div class="form-group">
@@ -46,29 +47,31 @@
                         <th>Progress</th>
                         <th style="width: 40px">Label</th>
                         <th style="width: 45px">Delete</th>
-
                     </tr>
                     </thead>
                     <tbody>
                     <tr v-for="(todo, index) in filteredTodos">
-                        <td>{{index + from}}</td>
-                        <td>
-                            <span v-if="!EdName[index]" @dblclick="editName(index,page)">{{todo.name}}</span>
-                            <span v-else @keyup.enter="editName(index,page)"><input v-model="todo.name" style="width: 95%"></span>
-                        </td>
-                        <td>
-                            <span v-if="!EdPriority[index]" @dblclick="editPriority(index,page)">{{todo.priority}}</span>
-                            <span v-else @keyup.enter="editPriority(index,page)"><input v-model="todo.priority" size="3"></span>
-                        </td>
-                        <td>{{todo.done}}</td>
-                        <td>
-                            <div class="progress progress-xs">
-                                <div class="progress-bar progress-bar-danger" style="width: 100%"></div>
-                            </div>
-                        </td>
-                        <td><span class="badge bg-blue">95%</span></td>
-                        <td><button @click="delTodo(index)" class="btn btn-info pull-right" style="width: 100%">Del</button></td>
-
+                        <todo> </todo>
+                        <!--<td>{{index + from}}</td>-->
+                        <!--<td>-->
+                            <!--<span v-if="!editingName[index]" @dblclick="editTodoName(index,page)">{{todo.name}}</span>-->
+                            <!--<span v-else @keyup.enter="editTodoName(index,page)"><input v-model="todo.name" style="width: 100%; "></span>-->
+                        <!--</td>-->
+                        <!--<td>-->
+                            <!--<span v-if="!editingPriority[index]" @dblclick="editTodoPriority(index,page)">{{todo.priority}}</span>-->
+                            <!--<span v-else @keyup.enter="editTodoPriority(index,page)"><input v-model="todo.priority" size="3"></span>-->
+                        <!--</td>-->
+                        <!--<td>-->
+                            <!--<span v-if="todo.done"><input type="checkbox" class="flat-red" checked></span>-->
+                            <!--<span v-else><input type="checkbox" class="flat-red"></span>-->
+                        <!--</td>-->
+                        <!--<td>-->
+                            <!--<div class="progress progress-xs">-->
+                                <!--<div class="progress-bar progress-bar-danger" style="width: 95%"></div>-->
+                            <!--</div>-->
+                        <!--</td>-->
+                        <!--<td><span class="badge bg-red">55%</span></td>-->
+                        <!--<td><button @click="delTodo(index,todo.id)">Del</button></td>-->
                     </tr>
                     </tbody>
                 </table>
@@ -90,9 +93,11 @@
 
 </style>
 <script>
+
 import Pagination from './pagination.vue'
+import Todo from './Todo.vue'
     export default {
-        components : { Pagination },
+        components : { Pagination, Todo },
         data() {
             return {
                 todos: [],
@@ -114,6 +119,7 @@ import Pagination from './pagination.vue'
         },
         computed: {
             filteredTodos: function() {
+
                 var filters = {
                     all: function(todos) {
                         return todos;
@@ -129,6 +135,7 @@ import Pagination from './pagination.vue'
                         });
                     },
                 };
+
                 return filters[this.visibility](this.todos);
             }
         },
@@ -146,6 +153,7 @@ import Pagination from './pagination.vue'
                     sweetAlert("Oops...", "Something went wrong!", "error");
                     console.log(response);
                 });
+
             },
             reverseMessage: function() {
                 this.message = this.message.split('').reverse().join('');
@@ -200,14 +208,27 @@ import Pagination from './pagination.vue'
                 });
                 this.fetchPage(this.page);
             },
-            delTodo: function(index) {
-                this.index = index;
-                //this.delTodoFromApi(this.id);
-                this.todos.splice(index, 1);
-                //this.fetchPage(this.page);
+            delTodo: function(index,id) {
+                var del = this;
+                swal({
+                  title: "Are you sure?",
+                  text: "You will not be able to recover this task!",
+                  type: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#DD6B55",
+                  confirmButtonText: "Yes, delete it!",
+                  closeOnConfirm: false
+                },
+                function(){
+                    swal("Deleted!", "Your task has been deleted.", "success");
+                    //this.delTodoFromApi(id);
+                    del.todos.splice(index, 1);
+                    //this.fetchPage(page);
+
+                });
+
             },
             delTodoFromApi: function(id) {
-                console.log(id);
                 this.$http.delete('/api/v1/task/' + id).then((response) => {
                     console.log(response);
                 }, (response) => {

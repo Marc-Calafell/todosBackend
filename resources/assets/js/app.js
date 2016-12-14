@@ -15,6 +15,8 @@ require('./bootstrap');
 
 Vue.component('example', require('./components/Example.vue'));
 Vue.component('todos', require('./components/Todos.vue'));
+Vue.component('todo', require('./components/Todos.vue'));
+
 
 Vue.component(
     'passport-clients',
