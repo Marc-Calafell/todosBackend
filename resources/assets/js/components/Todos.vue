@@ -90,9 +90,7 @@
 
 </style>
 <script>
-
 import Pagination from './pagination.vue'
-
     export default {
         components : { Pagination },
         data() {
@@ -105,10 +103,10 @@ import Pagination from './pagination.vue'
                 total: 0,
                 perPage: 0,
                 page: 1,
-                EdName: [
+                editingName: [
                     false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,
                 ],
-                EdPriority: [
+                editingPriority: [
                     false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,
                 ],
                 id: 0,
@@ -116,7 +114,6 @@ import Pagination from './pagination.vue'
         },
         computed: {
             filteredTodos: function() {
-
                 var filters = {
                     all: function(todos) {
                         return todos;
@@ -132,7 +129,6 @@ import Pagination from './pagination.vue'
                         });
                     },
                 };
-
                 return filters[this.visibility](this.todos);
             }
         },
@@ -150,12 +146,15 @@ import Pagination from './pagination.vue'
                     sweetAlert("Oops...", "Something went wrong!", "error");
                     console.log(response);
                 });
-
+            },
+            reverseMessage: function() {
+                this.message = this.message.split('').reverse().join('');
             },
             fetchData: function() {
                 return this.fetchPage(1);
             },
             fetchPage: function(page) {
+                // GET /someUrl
                 this.$http.get('/api/v1/task?page=' + page).then((response) => {
                     this.todos = response.data.data;
                     this.to = response.data.to;
@@ -163,6 +162,7 @@ import Pagination from './pagination.vue'
                     this.total = response.data.total;
                     this.perPage = response.data.per_page;
                 }, (response) => {
+                    // error callback
                     sweetAlert("Oops...", "Something went wrong!", "error");
                     console.log(response);
                 });
@@ -182,10 +182,10 @@ import Pagination from './pagination.vue'
                     user_id: 1,
                 }
                 this.todos.push(todo);
-                this.APIAddTodo(todo);
+                this.addTodoToApi(todo);
                 this.newTodo = '';
             },
-            APIAddTodo: function(todo) {
+            addTodoToApi: function(todo) {
                 this.$http.post('/api/v1/task', {
                     name: todo.name,
                     priority: todo.priority,
@@ -194,6 +194,7 @@ import Pagination from './pagination.vue'
                 }).then((response) => {
                     console.log(response);
                 }, (response) => {
+                    // error callback
                     sweetAlert("Oops...", "Something went wrong!", "error");
                     console.log(response);
                 });
@@ -201,28 +202,38 @@ import Pagination from './pagination.vue'
             },
             delTodo: function(index) {
                 this.index = index;
+                //this.delTodoFromApi(this.id);
                 this.todos.splice(index, 1);
-
+                //this.fetchPage(this.page);
             },
-           
+            delTodoFromApi: function(id) {
+                console.log(id);
+                this.$http.delete('/api/v1/task/' + id).then((response) => {
+                    console.log(response);
+                }, (response) => {
+                    // error callback
+                    sweetAlert("Oops...", "Something went wrong!", "error");
+                    console.log(response);
+                });
+            },
             pageChanged: function(pageNum) {
                 this.page = pageNum;
                 this.fetchPage(pageNum);
             },
-            editName: function(index,pageNum) {
-                if (this.EdName[index] == true) {
-                    this.EdName[index] = false;
+            editTodoName: function(index,pageNum) {
+                if (this.editingName[index] == true) {
+                    this.editingName[index] = false;
                     return this.fetchPage(pageNum);
                 }
-                this.EdName[index] = true;
+                this.editingName[index] = true;
                 return this.fetchPage(pageNum);
             },
-            editPriority: function(index,pageNum) {
-                if (this.EdPriority[index] == true) {
-                    this.EdPriority[index] = false;
+            editTodoPriority: function(index,pageNum) {
+                if (this.editingPriority[index] == true) {
+                    this.editingPriority[index] = false;
                     return this.fetchPage(pageNum);
                 }
-                this.EdPriority[index] = true;
+                this.editingPriority[index] = true;
                 return this.fetchPage(pageNum);
             },
         }
