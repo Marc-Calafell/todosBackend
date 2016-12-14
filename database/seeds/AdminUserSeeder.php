@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 
 /**
- * Class UsersSeeder
+ * Class AdminUserSeeder
  */
 class AdminUserSeeder extends Seeder
 {
@@ -16,9 +16,9 @@ class AdminUserSeeder extends Seeder
     {
         try {
             factory(App\User::class)->create([
-                    "name" => "Marc Calafell",
+                    "name" => "Marc",
                     "email" => "mcalafellsmx@gmail.com",
-                    "password" => bcrypt(env('pass', '12345678'))]
+                    "password" => bcrypt(env('ADMIN_PWD', '123456'))]
             );
         } catch (\Illuminate\Database\QueryException $exception) {
 
