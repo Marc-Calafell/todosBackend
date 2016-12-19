@@ -182,7 +182,7 @@ class AcachaAdminLTELaravelTest extends TestCase
      */
     public function test404Page()
     {
-        $this->get('asdasdjlapmnnk')
+        $this->get('asdasdjtotuiotootlapmnnk')
             ->seeStatusCode(404)
             ->see('404');
     }
@@ -195,15 +195,15 @@ class AcachaAdminLTELaravelTest extends TestCase
     public function testNewUserRegistration()
     {
         $this->visit('/register')
-            ->type('Sergi Tur Badenas', 'name')
-            ->type('sergiturbadenas@gmail.com', 'email')
+            ->type('Marc Calafell', 'name')
+            ->type('mcalafellsmx@gmail.com', 'email')
             ->check('terms')
-            ->type('passw0RD', 'password')
-            ->type('passw0RD', 'password_confirmation')
+            ->type('123456', 'password')
+            ->type('123456', 'password_confirmation')
             ->press('Register')
             ->seePageIs('/home')
-            ->seeInDatabase('users', ['email' => 'sergiturbadenas@gmail.com',
-                                      'name'  => 'Sergi Tur Badenas', ]);
+            ->seeInDatabase('users', ['email' => 'mcalafellsmx@gmail.com',
+                                      'name'  => 'Marc Calafell', ]);
     }
 
     /**
@@ -243,7 +243,7 @@ class AcachaAdminLTELaravelTest extends TestCase
     public function testSendPasswordResetUserNotExists()
     {
         $this->visit('password/reset')
-            ->type('notexistingemail@gmail.com', 'email')
+            ->type('error@gmail.com', 'email')
             ->press('Send Password Reset Link')
             ->see('There were some problems with your input');
     }
