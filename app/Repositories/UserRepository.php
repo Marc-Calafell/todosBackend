@@ -14,7 +14,7 @@ class UserRepository implements Repository
     /**
      * Find a user on Database.
      *
-     * @param $id
+     * @param integer $id
      * @param array $columns
      * @return mixed
      */

@@ -1,10 +1,13 @@
 <?php
+
 namespace App\Policies;
+
 /**
  * Class HasAdmin
  * @package App\Policies
  */
-trait HasAdmin {
+trait HasAdmin
+{
     /**
      * @param $user
      * @param $ability

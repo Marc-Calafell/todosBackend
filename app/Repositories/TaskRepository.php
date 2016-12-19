@@ -14,7 +14,7 @@ class TaskRepository implements Repository
     /**
      * Find a Task.
      *
-     * @param $id
+     * @param integer $id
      * @param array $columns
      * @return mixed
      */

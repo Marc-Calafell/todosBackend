@@ -1,14 +1,20 @@
 <?php
+
 namespace App\Policies;
+
+
 use App\Task;
 use App\User;
+
 /**
  * Class BasePolicy
  * @package App\Policies
  */
 abstract class BasePolicy
 {
+
     abstract protected function model();
+
     /**
      * Determine whether the user can list the tasks.
      *
@@ -20,6 +26,7 @@ abstract class BasePolicy
         if ($user->hasPermissionTo('show-') . $this->model()) return true;
         return false;
     }
+
     /**
      * Determine whether the user can view the task.
      *
@@ -32,6 +39,7 @@ abstract class BasePolicy
         if ($user->hasPermissionTo('view-') . $this->model()) return true;
         return false;
     }
+
     /**
      * Determine whether the user can create tasks.
      *
@@ -43,6 +51,7 @@ abstract class BasePolicy
         if ($user->hasPermissionTo('create-') . $this->model()) return true;
         return false;
     }
+
     /**
      * Determine whether the user can update the task.
      *
@@ -58,6 +67,7 @@ abstract class BasePolicy
 //        if ($user->hasRole('editor')) return true;
 //        return $user->id == $task->user_id;
     }
+
     /**
      * Determine whether the user can delete the task.
      *

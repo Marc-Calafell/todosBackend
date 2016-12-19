@@ -33,13 +33,13 @@ class UserTasksController extends Controller
 
         $tasks = $user->tasks()->paginate(15);
 
-        return $this->generatePaginatedResponse($tasks, ['propietari' => 'marc calafell']);
+        return $this->generatePaginatedResponse($tasks, ['propietari' => 'Marc Calafell']);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function create()
     {
@@ -69,7 +69,7 @@ class UserTasksController extends Controller
      */
     public function show($idUser, $idTask)
     {
-        $task = User::findOrFail($idUser)->tasks[$idTask];
+        $task = User::findOrFail($idUser)->tasks[$idTask]; // Busquem primer que existeixi un usuari i a partir d'aques busquem la task
         return $this->transformer->transform($task);
     }
 

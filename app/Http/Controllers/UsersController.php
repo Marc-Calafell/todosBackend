@@ -30,20 +30,19 @@ class UsersController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         $users = User::paginate(15);
 
-        return $this->generatePaginatedResponse($users, ['propietari' => 'marc calafell']);
+        return $this->generatePaginatedResponse($users, ['propietari' => 'Marc Calafell']);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function create()
     {
@@ -76,7 +75,6 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //        $user = User::findOrFail($id);
         $user = $this->repository->find($id);
 
         return $this->transformer->transform($user);

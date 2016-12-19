@@ -13,11 +13,9 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
 Vue.component('todos', require('./components/Todos.vue'));
-Vue.component('todo', require('./components/Todos.vue'));
-
-
+Vue.component('todo', require('./components/Todo.vue'));
+Vue.component('pagination', require('./components/pagination.vue'));
 Vue.component(
     'passport-clients',
     require('./components/passport/Clients.vue')
