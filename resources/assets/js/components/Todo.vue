@@ -8,7 +8,10 @@
             <template v-if="!editing">
                 <span @dblclick="edit">{{todo.name}}</span>
             </template>
-            <input v-model="todo.name" v-show="editing" @keyup.esc="unedit" @keyup.enter="save"> <i class="fa fa-fw fa-edit" v-show="!editing" @click="edit"></i> <i class="fa fa-fw fa-check" @click="save" v-show="editing"></i> <i class="fa fa-fw fa-close" v-show="editing" @click="unedit"></i>
+            <input v-model="todo.name" v-show="editing" @keyup.esc="unedit" @keyup.enter="save">
+            <i class="fa fa-fw fa-edit" v-show="!editing" @click="edit"></i>
+            <i class="fa fa-fw fa-check" @click="save" v-show="editing"></i>
+            <i class="fa fa-fw fa-close" v-show="editing" @click="unedit"></i>
         </td>
         <td>{{todo.priority}}</td>
         <td>{{todo.done}}</td>
@@ -17,13 +20,13 @@
                 <div class="progress-bar progress-bar-danger" style="width: 95%"></div>
             </div>
         </td>
-        <td><span class="badge bg-red">95%</span></td>
+        <td><span class="badge bg-blue">95%</span></td>
         <td>
-            <span class="btn btn-md btn-info">
-                <i class="fa fa-fw fa-edit" @click="edittodo"></i>
+            <span class="btn btn-md btn-info"  @click="edittodo">
+                <i class="fa fa-fw fa-edit" style="width: 100%; height: 100%;"></i>
             </span>
-            <span class="btn btn-md btn-danger">
-                <i class="fa fa-fw fa-trash" @click="deletetodo(index)"></i>
+            <span class="btn btn-md btn-danger" @click="deletetodo(index)" >
+                <i class="fa fa-fw fa-trash" style="width: 100%; height: 100%;"></i>
             </span>
         </td>
     </tr>

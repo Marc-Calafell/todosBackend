@@ -47,7 +47,7 @@
                         <th>Done</th>
                         <th>Progress</th>
                         <th style="width: 40px">Label</th>
-                        <th>Actions</th>
+                        <th style="width: 100px">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -188,7 +188,6 @@ export default {
         },
         deleteTodo: function(index) {
             this.todos.splice(index,1)
-            //TODO -> executar API
         }
     }
 }
