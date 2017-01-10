@@ -17,7 +17,7 @@
 <style>
 
 	div#A {
-		width: 450px;
+		max-width: 450px;
 		color: black;
 		margin: auto;
 	}
