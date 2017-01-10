@@ -45,9 +45,9 @@
 
 	div#C {
 		color: blue;
-		position: fixed;
-		top: 0;
-		left: 0;
+		position: absolute;
+		bottom: 0;
+		right: 0;
 		width: 650px;
 		margin: auto;
 		padding: 25px;
