@@ -17,13 +17,24 @@
 <style>
 
 	div#A {
-		max-width: 450px;
+		position: static;
+		width: 450px;
+		margin: 20px auto;
+		border: solid pink 2px;
+
 		color: black;
-		margin: auto;
+		/*margin: auto;*/
+		box-sizing: border-box;
 	}
 
 	div#B {
 		color: red;
+		position: relative;
+		width: 650px;
+		margin: auto;
+		padding: 25px;
+		border: solid cyan 2px;
+		box-sizing: border-box;
 
 	}
 </style>
