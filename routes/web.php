@@ -23,6 +23,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/float', function () {
+    return view('float');
+});
+
 
 
 
