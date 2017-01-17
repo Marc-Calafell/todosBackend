@@ -29,6 +29,7 @@ Menu::macro('sidebar', function () {
 //        ->url('http://www.google.com', 'Google')
         ->add(Menu::adminlteSeparator('Acacha Adminlte'))
         #adminlte_menu
+        ->add(Link::toUrl('Bootstrap', 'Bootstrap'))
         ->add(Link::toUrl('FlexBox', 'FlexBox'))
         ->add(Link::toUrl('CSSTables', 'CSSTables'))
         ->add(Link::toUrl('layoutfload', 'Layoutfload'))
