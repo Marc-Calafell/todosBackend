@@ -9,11 +9,42 @@
 </head>
 <body>
 
+<style>
+	html{
+		font-family: "Century Schoolbook L";
+	}
+
+	form{
+		display: table;
+	}
+
+	form div {
+		display: table-row;
+	}
+
+	form label , form input {
+		display: table-cell;
+
+	}
+
+</style>
+
 
 <form action="">
-
-
-
+	<div>
+			<label for="name">name</label>
+			<input type="text" name="name">
+	</div>
+	
+	<div>
+		<label for="surname">surname</label>
+		<input type="text" name="surname">
+	</div>
+	
+	<div>
+		<label for="age">age</label>
+		<input type="text" name="age">
+	</div>
 </form>
 
 
