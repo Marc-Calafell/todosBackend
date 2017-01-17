@@ -15,6 +15,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     #adminlte_routes
+    Route::get('layoutfload', 'LayoutfloadController@index')->name('layoutfload');
+
     Route::get('boxmodel', 'BoxmodelController@index')->name('boxmodel');
 
 });
