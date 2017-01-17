@@ -15,6 +15,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     #adminlte_routes
+    Route::get('FlexBox', 'FlexBoxController@index')->name('FlexBox');
+
     Route::get('CSSTables', 'CSSTablesController@index')->name('CSSTables');
 
     Route::get('layoutfload', 'LayoutfloadController@index')->name('layoutfload');
