@@ -18,11 +18,30 @@
 
 </head>
 <body>
-<div class="container">
+<div class="jumbotron">
 	<h1>TODO</h1>
 
 </div>
 
+<div class="container-fluid">
+	<div class="row debug">
+		<div class="col-md-4">asdasd</div>
+		<div class="col-md-4">asdasd</div>
+		<div class="col-md-4">asasd</div>
+	</div>
+
+	<div class="row debug">
+		<div class="col-md-5">asdasd</div>
+		<div class="col-md-5">asdasd</div>
+		<div class="col-md-5">asasd</div>
+	</div>
+
+	<div class="row debug">
+		<div class="col-md-3">asdasd</div>
+		<div class="col-md-3">asdasd</div>
+		<div class="col-md-3">asasd</div>
+	</div>
+</div>
 
 </body>
 </html>
