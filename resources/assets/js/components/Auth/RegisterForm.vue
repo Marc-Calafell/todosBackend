@@ -47,8 +47,6 @@
     }
 </style>
 <script>
-    //import HeaderComponent from './components/header.vue'
-   //import OtherComponent from './components/other.vue'
     export default{
         mounted(){
         console.log("mounted component")
@@ -60,9 +58,6 @@
            }
         },
 
-      //  components:{
-           // 'other-component':OtherComponent,
-            //HeaderComponent,
-   //     }
+
     }
 </script>
