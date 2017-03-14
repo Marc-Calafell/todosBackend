@@ -6,7 +6,6 @@ use App\Repositories\TaskRepository;
 use App\Task;
 use App\Transformers\TaskTransformer;
 use Auth;
-use Gate;
 use Illuminate\Http\Request;
 
 /**
@@ -29,10 +28,8 @@ class TasksController extends Controller
      * @param TaskTransformer $transformer
      * @param TaskRepository $repository
      */
-    public function __construct(TaskTransformer $transformer, TaskRepository $repository)
-    {
+    public function __construct(TaskTransformer $transformer, TaskRepository $repository) {
         parent::__construct($transformer);
-
         $this->repository = $repository;
     }
 
@@ -41,8 +38,7 @@ class TasksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         $tasks = Task::paginate(15);
         return $this->generatePaginatedResponse($tasks, ['propietari' => 'Marc Calafell']);
     }
@@ -66,15 +62,19 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required|min:4|max:255',
+        ]);
+
         if (!$request->has('user_id')) {
             $request->merge(['user_id' => Auth::id()]);
         }
+        $this->repository->create($request->all());
 
-        Task::create($request->all());   // Retorna tots els arrays
         return response([
             'error'   => false,
             'created' => true,
-            'message' => 'Task created successfully',
+            'message' => 'Task created',
         ], 200);
     }
 
@@ -87,8 +87,7 @@ class TasksController extends Controller
      */
     public function show($id)
     {
-        $task = $this->repository->find($id);
-
+        $task = $this->repository->findOrFail($id);
         return $this->transformer->transform($task);
     }
 
@@ -135,7 +134,7 @@ class TasksController extends Controller
         return response([
             'error'   => false,
             'destroyed' => true,
-            'message' => 'Task deleted successfully',
+            'message' => 'Task destroyed successfully',
         ], 200);
     }
 }

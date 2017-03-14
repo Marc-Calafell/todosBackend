@@ -16,6 +16,8 @@ require('./bootstrap');
 Vue.component('todos', require('./components/Todos.vue'));
 Vue.component('todo', require('./components/Todo.vue'));
 Vue.component('pagination', require('./components/pagination.vue'));
+Vue.component('register-form', require('./components/Auth/RegisterForm.vue'));
+
 Vue.component(
     'passport-clients',
     require('./components/passport/Clients.vue')
