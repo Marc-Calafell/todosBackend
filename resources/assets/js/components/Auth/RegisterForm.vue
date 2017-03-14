@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form method="post" @submit.prevent>
+        <form method="post" @submit.prevent="submit">
             <input type="hidden" name="_token" value="">
 
             <div class="form-group has-feedback">
@@ -51,10 +51,27 @@
         mounted(){
         console.log("mounted component")
         },
+        data: function(){
+            return{
+                name: ,
+                email: ,
+                password: ,
+                password_confirmation: ,
+                terms: false
+            }
+        },
 
         methods : {
            submit(){
-                console.log("submit component")
+                console.log("submit")
+                axios.post('/register',data)
+                .then(function (response) {
+                    console.log(response);
+                })
+
+                .catch(function (error) {
+                    console.log(error);
+                });
            }
         },
 
