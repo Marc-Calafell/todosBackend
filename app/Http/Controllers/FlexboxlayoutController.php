@@ -2,24 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use Faker\Provider\Base;
 use Illuminate\Http\Request;
 
-class LayoutfloadController extends Controller
+use Illuminate\Routing\Controller as BaseController;
+
+class FlexboxlayoutController extends BaseController
 {
     //
     /**
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index()
     {
-        return view('layoutfload');
+        $data = [];
+        return view('flexboxlayout',$data);
     }
 
 }

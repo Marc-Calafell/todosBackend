@@ -1,8 +1,8 @@
-
 filter:
     paths: ["app/*"]
-    excluded_paths: [tests/*,public/plugins/*]
-
+    excluded_paths:
+      - "tests/*"
+      - "public/plugins/*"
 checks:
     php:
         remove_extra_empty_lines: true

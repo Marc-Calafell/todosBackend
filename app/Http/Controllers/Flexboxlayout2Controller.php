@@ -4,22 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class CSSTablesController extends Controller
+use Illuminate\Routing\Controller as BaseController;
+
+
+class Flexboxlayout2Controller extends BaseController
 {
     //
     /**
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index()
     {
-        return view('CSSTables');
+        $data = [];
+        return view('flexboxlayout2',$data);
     }
-
 
 }

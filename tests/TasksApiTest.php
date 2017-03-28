@@ -98,36 +98,35 @@ class TasksApiTest extends TestCase
      *
      * @return void
      */
-//    public function testRetrieveAllTasks()
-//    {
-//        //Seed database
-//        $this->seedDatabaseWithTasks();
-//
-//        $this->login();
-//        $this->json('GET', $this->uri)
-//            ->seeJsonStructure([
-//                'propietari',
-//                'total',
-//                'per_page',
-//                'current_page',
-//                'last_page',
-//                'previous_page_url',
-//                'next_page_url',
-//                'data' => [
-//                    '*' => [
-//                        'name',
-//                        'done',
+    public function testRetrieveAllTasks()
+    {
+        //Seed database
+        $this->seedDatabaseWithTasks();
 
-//                        'priority',
-//                        'user_id'
-//                    ],
-//                ],
-//            ])
-//            ->assertEquals(
-//                self::DEFAULT_NUMBER_OF_TASKS,
-//                count($this->decodeResponseJson()['data'])
-//            );
-//    }
+        $this->login();
+        $this->json('GET', $this->uri)
+             ->seeJsonStructure([
+                 'propietari',
+                 'total',
+                 'per_page',
+                 'current_page',
+                 'last_page',
+                 'previous_page_url',
+                 'next_page_url',
+                 'data' => [
+                     '*' => [
+                         'name',
+                         'done',
+                         'priority',
+                         'user_id'
+                     ],
+                 ],
+            ])
+            ->assertEquals(
+                self::DEFAULT_NUMBER_OF_TASKS,
+                count($this->decodeResponseJson()['data'])
+        );
+    }
 
     /**
      * Test Retrieve one task.
@@ -257,4 +256,45 @@ class TasksApiTest extends TestCase
         $this->aTestNotExists('PUT');
     }
 
+    /**
+     * Test pagination.
+     *
+     * @return void
+     */
+    public function testPagination()
+    {
+        //TODO
+    }
+
+    //TODO: Test validation
+
+    /**
+     * Test name is required and done is set to false and priority to 1.
+     *
+     * @return void
+     */
+    public function testNameIsRequiredAndDefaultValues()
+    {
+        //TODO
+    }
+
+    /**
+     * Test priority has to be an integer.
+     *
+     * @return void
+     */
+    public function testPriorityHaveToBeAnInteger()
+    {
+        //TODO
+    }
+
+    /**
+     * Test done has to be a boolean.
+     *
+     * @return void
+     */
+    public function testDoneHaveToBeBoolean()
+    {
+        //TODO
+    }
 }

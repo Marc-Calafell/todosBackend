@@ -2,7 +2,7 @@
 
 Contributions are **welcome** and will be fully **credited**.
 
-We accept contributions via Pull Requests on [Github](https://github.com/todosBackend/).
+We accept contributions via Pull Requests on [Github](https://github.com/Marc-Calafell/todosBackend).
 
 
 ## Pull Requests

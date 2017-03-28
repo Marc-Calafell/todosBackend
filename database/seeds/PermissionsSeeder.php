@@ -1,6 +1,8 @@
 <?php
+
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
+
 class PermissionsSeeder extends Seeder
 {
     /**
@@ -10,7 +12,6 @@ class PermissionsSeeder extends Seeder
      */
     public function run()
     {
-        Permission::create(['name' => 'admin']);
         Permission::create(['name' => 'show-task']);
         Permission::create(['name' => 'view-task']);
         Permission::create(['name' => 'create-task']);

@@ -35,11 +35,6 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
-    'github' => [
-        'client_id' => env('GITHUB_CLIENT_ID'),
-        'client_secret' => env('GITHUB_CLIENT_SECRET'),
-        'redirect' => 'http://localhost:8000/auth/github/callback',
-    ],
     /*
     | Acacha Llum services...
     |
@@ -47,24 +42,6 @@ return [
     |
     */
     #llum_services
-
-    'google' => [
-        'client_id' => env('GOOGLE_OAUTH_APP_ID'),
-        'client_secret' => env('GOOGLE_OAUTH_APP_SECRET'),
-        'redirect' => env('GOOGLE_OAUTH_APP_REDIRECT_URL'),
-    ],
-
-    'facebook' => [
-        'client_id' => env('FACEBOOK_OAUTH_APP_ID'),
-        'client_secret' => env('FACEBOOK_OAUTH_APP_SECRET'),
-        'redirect' => env('FACEBOOK_OAUTH_APP_REDIRECT_URL'),
-    ],
-
-    'github' => [
-        'client_id' => env('GITHUB_OAUTH_APP_ID'),
-        'client_secret' => env('GITHUB_OAUTH_APP_SECRET'),
-        'redirect' => env('GITHUB_OAUTH_APP_REDIRECT_URL'),
-    ],
 
 
     /*

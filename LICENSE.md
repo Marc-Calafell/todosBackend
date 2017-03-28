@@ -1,6 +1,6 @@
 # The MIT License (MIT)
 
-Copyright (c) 2016 Marc-Calafell <marccalafell95@gmail.com>
+Copyright (c) 2016 Franc Auxach Cortés <franciscoenriqueauxach@iesebre.com>
 
 > Permission is hereby granted, free of charge, to any person obtaining a copy
 > of this software and associated documentation files (the "Software"), to deal

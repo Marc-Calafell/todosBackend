@@ -3,22 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller as BaseController;
 
-class FlexBoxController extends Controller
+class LayoutfloatController extends BaseController
 {
     //
     /**
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index()
     {
-        return view('FlexBox');
+        $data = [];
+        return view('layoutfloat',$data);
     }
 
 }

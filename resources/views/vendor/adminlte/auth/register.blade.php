@@ -1,7 +1,7 @@
 @extends('adminlte::layouts.auth')
 
 @section('htmlheader_title')
-    Registre de todosBackend
+    Register
 @endsection
 
 @section('content')
@@ -10,7 +10,7 @@
     <div id="app">
         <div class="register-box">
             <div class="register-logo">
-                <a href="{{ url('/home') }}"><b>Admin</b>LTE TodosBackend</a>
+                <a href="{{ url('/home') }}"><b>Admin</b>LTE</a> UI
             </div>
 
             @if (count($errors) > 0)
@@ -27,11 +27,7 @@
             <div class="register-box-body">
                 <p class="login-box-msg">{{ trans('adminlte_lang::message.registermember') }}</p>
 
-                <register-form>
-
-                    {{--Formulari de registre--}}
-
-                </register-form>
+                <register-form></register-form>
 
                 @include('adminlte::auth.partials.social_login')
 

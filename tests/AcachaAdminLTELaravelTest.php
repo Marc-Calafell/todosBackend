@@ -15,9 +15,6 @@ class AcachaAdminLTELaravelTest extends TestCase
      * see: https://github.com/laravel/laravel/pull/3943
      *      https://github.com/laravel/framework/issues/15426
      */
-    /**
-     * @return mixed
-     */
     public function createApplication()
     {
         $app = require __DIR__.'/../bootstrap/app.php';
@@ -182,7 +179,7 @@ class AcachaAdminLTELaravelTest extends TestCase
      */
     public function test404Page()
     {
-        $this->get('asdasdjtotuiotootlapmnnk')
+        $this->get('asdasdjlapmnnk')
             ->seeStatusCode(404)
             ->see('404');
     }
@@ -195,15 +192,15 @@ class AcachaAdminLTELaravelTest extends TestCase
     public function testNewUserRegistration()
     {
         $this->visit('/register')
-            ->type('Marc Calafell', 'name')
-            ->type('mcalafellsmx@gmail.com', 'email')
+            ->type('Sergi Tur Badenas', 'name')
+            ->type('sergiturbadenas@gmail.com', 'email')
             ->check('terms')
-            ->type('123456', 'password')
-            ->type('123456', 'password_confirmation')
+            ->type('passw0RD', 'password')
+            ->type('passw0RD', 'password_confirmation')
             ->press('Register')
             ->seePageIs('/home')
-            ->seeInDatabase('users', ['email' => 'mcalafellsmx@gmail.com',
-                                      'name'  => 'Marc Calafell', ]);
+            ->seeInDatabase('users', ['email' => 'sergiturbadenas@gmail.com',
+                                      'name'  => 'Sergi Tur Badenas', ]);
     }
 
     /**
@@ -243,7 +240,7 @@ class AcachaAdminLTELaravelTest extends TestCase
     public function testSendPasswordResetUserNotExists()
     {
         $this->visit('password/reset')
-            ->type('error@gmail.com', 'email')
+            ->type('notexistingemail@gmail.com', 'email')
             ->press('Send Password Reset Link')
             ->see('There were some problems with your input');
     }

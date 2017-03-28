@@ -39,9 +39,9 @@ require('sweetalert');
 //     next();
 // });
 
-window.axios = require('axios');
+// axios.defaults.headers.common['X-CSRF-TOKEN'] = Laravel.csrfToken;
 
-window.axios.defaults.headers.common = {
+axios.defaults.headers.common = {
     'X-CSRF-TOKEN': window.Laravel.csrfToken,
     'X-Requested-With': 'XMLHttpRequest'
 };

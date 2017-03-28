@@ -11,44 +11,76 @@
 
 <style>
 
-	body {
-		margin: 0px;
-		margin-bottom: 50px;
-	}
+body {
+	margin: 0px;
+	margin-bottom: 50px;
+}
 
-	#nav {
-		position: absolute;
-		left:0px;
-		width: 200px;
-		border: solid black 1px;
-		background-color: lightgrey;
-	}
+#header {
+	position: relative;
+	background-color: lightgoldenrodyellow;
+	border: solid black 1px;
+	text-align: center;
+}
 
-	#section {
-		margin-left: 200px;
-		padding: 10px;
-		background-color: lightcoral;
-	}
+#nav
+{
+	position: absolute;
+	left: 0px;
+	width: 200px;
+	border: solid black 1px;
+	background-color: lightgrey;
+}
 
-	#footer {
-		position: fixed;
-		bottom: 0px;
-		height: 50px;
-		border: solid black 1px;
-		width: 100%;
-		background-color: lightblue;
-	}
+#nav-right {
+	position: absolute;
+	right: 0px;
+	width: 200px;
+	border: solid black 1px;
+	background-color: lightgrey;
+}
 
-	#container {
-		position:relative
-	}
+#section {
+	border: solid black 1px;
+	margin-left: 200px;
+	margin-right: 200px;
+	padding: 10px;
+	background-color: lightcoral;
 
+}
+
+#footer {
+	position: fixed;
+	bottom: 0px;
+	height: 80px;
+	border: solid black 1px;
+	width: 100%;
+	background-color: lightblue;
+}
+
+#container{
+	position: relative;
+}
 </style>
-
 <div id="container">
+	
+	<div id="header">
+		<h1>Sample BoxModel example</h1>
+	</div>
+	
 	<div id="nav">
 		<ul>
-			<li>link1</li>
+			<li>Link1</li>
+			<li>Link2</li>
+			<li>Link3</li>
+			<li>Contact</li>
+			<li>About</li>
+		</ul>
+	</div>
+
+	<div id="nav-right">
+		<ul>
+			<li>Link1</li>
 			<li>Link2</li>
 			<li>Link3</li>
 			<li>Contact</li>
@@ -57,86 +89,93 @@
 	</div>
 
 	<div id="section">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores cumque dolor est eveniet incidunt magnam modi neque nesciunt perspiciatis porro, quibusdam quisquam recusandae sapiente sint tenetur velit voluptates. Explicabo, fugiat.
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis, deleniti dolor, dolores error excepturi explicabo facere illo laboriosam magnam magni necessitatibus nihil odio quam quisquam sapiente sed sunt voluptas voluptatibus!
 	</div>
 
 	<div id="section">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque harum quaerat quia. Beatae nisi quasi sequi! Adipisci iusto non omnis sint! Amet autem dolores error nihil nostrum officiis repellendus saepe.
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aspernatur dolorum, earum explicabo, illum ipsum laborum officia omnis placeat quae reiciendis repudiandae rerum sint voluptatem voluptatum. Illum nisi officia voluptatem.
 	</div>
 
 	<div id="section">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque harum quaerat quia. Beatae nisi quasi sequi! Adipisci iusto non omnis sint! Amet autem dolores error nihil nostrum officiis repellendus saepe.
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aspernatur dolorum, earum explicabo, illum ipsum laborum officia omnis placeat quae reiciendis repudiandae rerum sint voluptatem voluptatum. Illum nisi officia voluptatem.
 	</div>
 
 	<div id="section">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque harum quaerat quia. Beatae nisi quasi sequi! Adipisci iusto non omnis sint! Amet autem dolores error nihil nostrum officiis repellendus saepe.
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aspernatur dolorum, earum explicabo, illum ipsum laborum officia omnis placeat quae reiciendis repudiandae rerum sint voluptatem voluptatum. Illum nisi officia voluptatem.
 	</div>
 
 	<div id="section">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque harum quaerat quia. Beatae nisi quasi sequi! Adipisci iusto non omnis sint! Amet autem dolores error nihil nostrum officiis repellendus saepe.
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aspernatur dolorum, earum explicabo, illum ipsum laborum officia omnis placeat quae reiciendis repudiandae rerum sint voluptatem voluptatum. Illum nisi officia voluptatem.
 	</div>
 
 	<div id="section">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque harum quaerat quia. Beatae nisi quasi sequi! Adipisci iusto non omnis sint! Amet autem dolores error nihil nostrum officiis repellendus saepe.
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aspernatur dolorum, earum explicabo, illum ipsum laborum officia omnis placeat quae reiciendis repudiandae rerum sint voluptatem voluptatum. Illum nisi officia voluptatem.
 	</div>
 
 	<div id="section">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque harum quaerat quia. Beatae nisi quasi sequi! Adipisci iusto non omnis sint! Amet autem dolores error nihil nostrum officiis repellendus saepe.
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aspernatur dolorum, earum explicabo, illum ipsum laborum officia omnis placeat quae reiciendis repudiandae rerum sint voluptatem voluptatum. Illum nisi officia voluptatem.
 	</div>
 
 	<div id="section">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque harum quaerat quia. Beatae nisi quasi sequi! Adipisci iusto non omnis sint! Amet autem dolores error nihil nostrum officiis repellendus saepe.
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aspernatur dolorum, earum explicabo, illum ipsum laborum officia omnis placeat quae reiciendis repudiandae rerum sint voluptatem voluptatum. Illum nisi officia voluptatem.
 	</div>
 
 	<div id="section">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque harum quaerat quia. Beatae nisi quasi sequi! Adipisci iusto non omnis sint! Amet autem dolores error nihil nostrum officiis repellendus saepe.
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aspernatur dolorum, earum explicabo, illum ipsum laborum officia omnis placeat quae reiciendis repudiandae rerum sint voluptatem voluptatum. Illum nisi officia voluptatem.
 	</div>
 
 	<div id="section">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque harum quaerat quia. Beatae nisi quasi sequi! Adipisci iusto non omnis sint! Amet autem dolores error nihil nostrum officiis repellendus saepe.
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aspernatur dolorum, earum explicabo, illum ipsum laborum officia omnis placeat quae reiciendis repudiandae rerum sint voluptatem voluptatum. Illum nisi officia voluptatem.
 	</div>
 
 	<div id="section">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque harum quaerat quia. Beatae nisi quasi sequi! Adipisci iusto non omnis sint! Amet autem dolores error nihil nostrum officiis repellendus saepe.
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aspernatur dolorum, earum explicabo, illum ipsum laborum officia omnis placeat quae reiciendis repudiandae rerum sint voluptatem voluptatum. Illum nisi officia voluptatem.
 	</div>
 
 	<div id="section">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque harum quaerat quia. Beatae nisi quasi sequi! Adipisci iusto non omnis sint! Amet autem dolores error nihil nostrum officiis repellendus saepe.
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aspernatur dolorum, earum explicabo, illum ipsum laborum officia omnis placeat quae reiciendis repudiandae rerum sint voluptatem voluptatum. Illum nisi officia voluptatem.
 	</div>
 
 	<div id="section">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque harum quaerat quia. Beatae nisi quasi sequi! Adipisci iusto non omnis sint! Amet autem dolores error nihil nostrum officiis repellendus saepe.
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aspernatur dolorum, earum explicabo, illum ipsum laborum officia omnis placeat quae reiciendis repudiandae rerum sint voluptatem voluptatum. Illum nisi officia voluptatem.
 	</div>
 
 	<div id="section">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque harum quaerat quia. Beatae nisi quasi sequi! Adipisci iusto non omnis sint! Amet autem dolores error nihil nostrum officiis repellendus saepe.
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aspernatur dolorum, earum explicabo, illum ipsum laborum officia omnis placeat quae reiciendis repudiandae rerum sint voluptatem voluptatum. Illum nisi officia voluptatem.
 	</div>
 
 	<div id="section">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque harum quaerat quia. Beatae nisi quasi sequi! Adipisci iusto non omnis sint! Amet autem dolores error nihil nostrum officiis repellendus saepe.
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aspernatur dolorum, earum explicabo, illum ipsum laborum officia omnis placeat quae reiciendis repudiandae rerum sint voluptatem voluptatum. Illum nisi officia voluptatem.
 	</div>
 
 	<div id="section">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque harum quaerat quia. Beatae nisi quasi sequi! Adipisci iusto non omnis sint! Amet autem dolores error nihil nostrum officiis repellendus saepe.
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aspernatur dolorum, earum explicabo, illum ipsum laborum officia omnis placeat quae reiciendis repudiandae rerum sint voluptatem voluptatum. Illum nisi officia voluptatem.
 	</div>
 
 	<div id="section">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque harum quaerat quia. Beatae nisi quasi sequi! Adipisci iusto non omnis sint! Amet autem dolores error nihil nostrum officiis repellendus saepe.
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aspernatur dolorum, earum explicabo, illum ipsum laborum officia omnis placeat quae reiciendis repudiandae rerum sint voluptatem voluptatum. Illum nisi officia voluptatem.
 	</div>
 
 	<div id="section">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque harum quaerat quia. Beatae nisi quasi sequi! Adipisci iusto non omnis sint! Amet autem dolores error nihil nostrum officiis repellendus saepe.
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aspernatur dolorum, earum explicabo, illum ipsum laborum officia omnis placeat quae reiciendis repudiandae rerum sint voluptatem voluptatum. Illum nisi officia voluptatem.
 	</div>
+
 	<div id="section">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque harum quaerat quia. Beatae nisi quasi sequi! Adipisci iusto non omnis sint! Amet autem dolores error nihil nostrum officiis repellendus saepe.
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aspernatur dolorum, earum explicabo, illum ipsum laborum officia omnis placeat quae reiciendis repudiandae rerum sint voluptatem voluptatum. Illum nisi officia voluptatem.
+	</div>
+
+	<div id="section">
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aspernatur dolorum, earum explicabo, illum ipsum laborum officia omnis placeat quae reiciendis repudiandae rerum sint voluptatem voluptatum. Illum nisi officia voluptatem.
+	</div>
+
+	<div id="section">
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aspernatur dolorum, earum explicabo, illum ipsum laborum officia omnis placeat quae reiciendis repudiandae rerum sint voluptatem voluptatum. Illum nisi officia voluptatem.
 	</div>
 
 	<div id="footer">
-		@copyright Acacha Inc. asdas dasd asd
+		Lorem ipsum dolor.
 	</div>
 </div>
-
-
 
 </body>
 </html>

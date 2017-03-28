@@ -34,9 +34,9 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(15);
+        $users = $this->repository->paginate(15);
 
-        return $this->generatePaginatedResponse($users, ['propietari' => 'Marc Calafell']);
+        return $this->generatePaginatedResponse($users, ['propietari' => 'Franc Auxach']);
     }
 
     /**
@@ -58,7 +58,7 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        User::create($request->all());
+        $this->repository->create($request->all());
         return response([
             'error'   => false,
             'created' => true,
@@ -75,7 +75,7 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        $user = $this->repository->find($id);
+        $user = $this->repository->findOrFail($id);
 
         return $this->transformer->transform($user);
     }
@@ -102,7 +102,7 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        User::findOrFail($id)->update($request->all());
+        $this->repository->update($request->all(),$id);
         return response([
             'error'   => false,
             'updated' => true,
@@ -119,7 +119,7 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        User::destroy($id);
+        $this->repository->delete($id);
         return response([
             'error'   => false,
             'destroyed' => true,

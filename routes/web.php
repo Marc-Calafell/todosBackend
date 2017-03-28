@@ -11,23 +11,25 @@ Route::group(['middleware' => 'auth'], function () {
         return view('tokens');
     });
 
-
-
-
     #adminlte_routes
-    Route::get('Bootstrap', 'BootstrapController@index')->name('Bootstrap');
-    Route::get('FlexBox', 'FlexBoxController@index')->name('FlexBox');
-    Route::get('CSSTables', 'CSSTablesController@index')->name('CSSTables');
-    Route::get('layoutfload', 'LayoutfloadController@index')->name('layoutfload');
+    Route::get('bootstraplayout', 'BootstraplayoutController@index')->name('bootstraplayout');
+
+    Route::get('flexboxlayout2', 'Flexboxlayout2Controller@index')->name('flexboxlayout2');
+
+    Route::get('flexboxlayout', 'FlexboxlayoutController@index')->name('flexboxlayout');
+
+    Route::get('csstables', 'CsstablesController@index')->name('csstables');
+
+    Route::get('layoutfloat', 'LayoutfloatController@index')->name('layoutfloat');
+
     Route::get('boxmodel', 'BoxmodelController@index')->name('boxmodel');
+    Route::get('float', function () {
+        return view('float');
+    });
+
 
 });
 
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/float', function () {
-    return view('float');
-});
-

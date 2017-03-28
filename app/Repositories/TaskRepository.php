@@ -18,8 +18,53 @@ class TaskRepository implements Repository
      * @param array $columns
      * @return mixed
      */
-    public function find($id, $columns = ['*'])
+    public function findOrFail($id, $columns = ['*'])
     {
         return Task::findOrFail($id);
+    }
+
+
+    /**
+     * Paginate a list of tasks.
+     *
+     * @param $perPage
+     * @return mixed
+     */
+    public function paginate($perPage = 15)
+    {
+        return Task::paginate($perPage);
+    }
+
+    /**
+     * Create a task throught an array with data.
+     *
+     * @param array $data
+     */
+    public function create(array $data)
+    {
+        Task::create($data);
+    }
+
+    /**
+     * Update a task.
+     *
+     * @param array $data
+     * @param $id
+     */
+    public function update(array $data, $id)
+    {
+        $task = $this->findOrFail($id);
+        $task->update($data);
+    }
+
+    /**
+     * Delete a task.
+     *
+     * @param $id
+     */
+    public function delete($id)
+    {
+        $task = $this->findOrFail($id);
+        $task->delete();
     }
 }

@@ -8,8 +8,7 @@ use Laravel\Passport\Passport;
 use Route;
 
 /**
- * Class AuthServiceProvider.
- *
+ * Class AuthServiceProvider
  * @package App\Providers
  */
 class AuthServiceProvider extends ServiceProvider
@@ -40,20 +39,17 @@ class AuthServiceProvider extends ServiceProvider
         Passport::enableImplicitGrant();
 
         $this->defineGates();
+
     }
 
-    protected function defineGates()
+    private function defineGates()
     {
-        Gate::define('gate-name',function() {
-
+        Gate::define('impossible-gate', function () {
+            return false;  // No autoritzat
         });
 
-        Gate::define('impossible-gate',function() {
-            return false; //No autoritzat
-        });
-
-        Gate::define('easy-gate',function() {
-            return true; //Autoritzat
+        Gate::define('easy-gate', function () {
+            return true;   // Autoritzat
         });
 
     }

@@ -6,10 +6,13 @@ use App\Repositories\TaskRepository;
 use App\Task;
 use App\Transformers\TaskTransformer;
 use Auth;
+use Gate;
 use Illuminate\Http\Request;
 
 /**
  * Class TasksController
+ *
+ * [Descripció de la classe] -> Opcional (accepta HTML bàsic)
  *
  * @package App\Http\Controllers
  */
@@ -28,8 +31,10 @@ class TasksController extends Controller
      * @param TaskTransformer $transformer
      * @param TaskRepository $repository
      */
-    public function __construct(TaskTransformer $transformer, TaskRepository $repository) {
+    public function __construct(TaskTransformer $transformer, TaskRepository $repository)
+    {
         parent::__construct($transformer);
+
         $this->repository = $repository;
     }
 
@@ -38,9 +43,10 @@ class TasksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-        $tasks = Task::paginate(15);
-        return $this->generatePaginatedResponse($tasks, ['propietari' => 'Marc Calafell']);
+    public function index()
+    {
+        $tasks = $this->repository->paginate(15);
+        return $this->generatePaginatedResponse($tasks, ['propietari' => 'Franc Auxach']);
     }
 
     /**
@@ -62,19 +68,16 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required|min:4|max:255',
-        ]);
-
         if (!$request->has('user_id')) {
             $request->merge(['user_id' => Auth::id()]);
         }
-        $this->repository->create($request->all());
+
+        $this->repository->create($request->all());   // Retorna tots els arrays
 
         return response([
             'error'   => false,
             'created' => true,
-            'message' => 'Task created',
+            'message' => 'Task created successfully',
         ], 200);
     }
 
@@ -88,6 +91,7 @@ class TasksController extends Controller
     public function show($id)
     {
         $task = $this->repository->findOrFail($id);
+
         return $this->transformer->transform($task);
     }
 
@@ -113,7 +117,7 @@ class TasksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Task::findOrFail($id)->update($request->all());
+        $this->repository->update($request->all(),$id);
         return response([
             'error'   => false,
             'updated' => true,
@@ -130,11 +134,11 @@ class TasksController extends Controller
      */
     public function destroy($id)
     {
-        Task::destroy($id);
+        $this->repository->delete($id);
         return response([
             'error'   => false,
             'destroyed' => true,
-            'message' => 'Task destroyed successfully',
+            'message' => 'Task deleted successfully',
         ], 200);
     }
 }
